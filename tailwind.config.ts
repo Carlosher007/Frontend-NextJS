@@ -14,6 +14,8 @@ const config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        foregroundSecondary: 'var(--foreground-secondary)',
+        foregroundTertiary: 'var(--foreground-tertiary)',
         border: 'hsl(var(--border))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',

@@ -1,9 +1,6 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/ui/globals.css";
-import { montserrant } from "@/ui/fonts";
-import Avatar from "@/ui/components/avatar";
-import SideMenu from "@/ui/side-menu";
+import { poppins } from "@/ui/fonts";
 
 export default function RootLayout({
   children,
@@ -12,22 +9,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='dark min-h-screen'>
-      <body className={`${montserrant.className} antialiased`}>
-        <div className='border-b'>
-          <div className='flex h-16 items-center px-4'>
-            IMAGE-HUB
-            <div className='ml-auto flex items-center space-x-4'>
-              <Avatar />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex">
-          <SideMenu />
-          <div>
-            {children}
-          </div>
-        </div>
+      <body className={`${poppins.className} antialiased`}>
+        {children}
       </body>
     </html>
   );

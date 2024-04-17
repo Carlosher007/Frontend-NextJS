@@ -1,8 +1,11 @@
-import { Lusitana, Montserrat } from 'next/font/google'; //Import any google font here
+import { Poppins, Kanit } from 'next/font/google'; //Import any google font here
 
-export const montserrant = Montserrat({ subsets: ['latin'] });
+export const poppins = Poppins({
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+});
 
-export const lusitana = Lusitana({
-  weight: ['400'],
+export const kanit = Kanit({
+  weight:['300','500'],
   subsets: ['latin'],
 });
