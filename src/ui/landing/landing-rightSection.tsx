@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import './right-section.css'
+import { Suspense } from 'react'
 
 export default function LandingRightSection() {
   return (

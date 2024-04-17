@@ -1,6 +1,6 @@
-import LandingHeader from '@/ui/landing/Landing-Header'
-import LandingLeftSection from '@/ui/landing/Landing-LeftSection';
-import LandingRightSection from '@/ui/landing/Landing-RightSection';
+import LandingHeader from '@/ui/landing/landing-header'
+import LandingLeftSection from '@/ui/landing/landing-leftSection';
+import LandingRightSection from '@/ui/landing/landing-rightSection';
 
 export default function Page() {
   return (

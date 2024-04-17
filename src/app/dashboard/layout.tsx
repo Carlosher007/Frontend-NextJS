@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/ui/globals.css";
-import { montserrant } from "@/ui/fonts";
+import { poppins } from "@/ui/fonts";
 import Avatar from "@/ui/components/avatar";
 import SideMenu from "@/ui/side-menu";
 
@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='dark min-h-screen'>
-      <body className={`${montserrant.className} antialiased`}>
+      <body className={`${poppins.className} antialiased`}>
         <div className='border-b'>
           <div className='flex h-16 items-center px-4'>
             IMAGE-HUB
