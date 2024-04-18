@@ -1,13 +1,23 @@
 import Link from 'next/link'
-import './header.css'
 
 export default function LandingHeader() {
   return (
-    <header>
-      <h1 className="logo">Imagehub</h1>
-      <ul>
-        <li><Link href="/auth/login" className='link'>Login</Link></li>
-        <li><Link href="/auth/register" className='link'>Register</Link></li>
+    <header className="w-full flex md:justify-between justify-center py-10 px-20">
+      <h1 className="text-2xl uppercase font-bold tracking-wider">Imagehub</h1>
+      <ul className="hidden md:flex space-x-10">
+        <li>
+          <Link href="/auth/login">
+            <span className='uppercase tracking-wider transition-colors duration-500 hover:text-foregroundSecondary'>Login</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/auth/register"
+            className='uppercase tracking-wider transition-colors duration-500  hover:text-foregroundSecondary'
+          >
+            Register
+          </Link>
+        </li>
       </ul>
     </header>
   )

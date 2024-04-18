@@ -16,14 +16,9 @@ const config = {
         foreground: 'var(--foreground)',
         foregroundSecondary: 'var(--foreground-secondary)',
         foregroundTertiary: 'var(--foreground-tertiary)',
-        border: 'hsl(var(--border))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
         },
       },
     },

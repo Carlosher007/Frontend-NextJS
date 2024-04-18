@@ -6,7 +6,7 @@ export default function LandingRightSection() {
   return (
     <div className="container">
       <div className='item img1'>
-        <Image className="item-image" src="/images/landing/img1.jpg" alt="img1" width={4000} height={6000} />
+        <Image className="item-image" src="/images/landing/img1.jpg" alt="img1" width={4000} height={6000} priority={true} />
       </div>
       <div className='item img2'>
         <Image className="item-image" src="/images/landing/img2.jpg" alt="img2" width={2204} height={3308} />
