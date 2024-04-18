@@ -11,6 +11,7 @@
 @layer base {
   .dark {
     --background: #222;
+    --background-secondary: #1a1f24;
     --foreground: #fff;
     --foreground-secondary: #999;
     --foreground-tertiary: #0f0;

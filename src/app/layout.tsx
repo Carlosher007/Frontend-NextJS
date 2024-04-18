@@ -1,6 +1,8 @@
+'use client'
 import { Inter } from "next/font/google";
 import "@/ui/globals.css";
 import { poppins } from "@/ui/fonts";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function RootLayout({
   children,
@@ -10,7 +12,9 @@ export default function RootLayout({
   return (
     <html lang="en" className='dark min-h-screen'>
       <body className={`${poppins.className} antialiased`}>
-        {children}
+        <NextUIProvider>
+          {children}
+        </NextUIProvider>
       </body>
     </html>
   );
