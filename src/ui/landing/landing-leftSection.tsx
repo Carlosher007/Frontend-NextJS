@@ -1,5 +1,5 @@
 // import './left-section.css'
-import { kanit, poppins } from '../fonts'
+import { kanit, poppins } from '../../config/fonts'
 import Link from 'next/link'
 
 export default function LandingLeftSection() {

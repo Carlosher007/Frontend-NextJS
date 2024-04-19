@@ -6,9 +6,7 @@ export default function Page() {
 
   return (
     <div>
-      <Button color="primary">
-        Button
-      </Button>
+      <h1>Dashboard</h1>
     </div>
   );
 }
