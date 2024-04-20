@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className='dark min-h-screen'>
-      <body className={`${poppins.className} antialiased min-h-screen`}>
+    <html lang="en">
+      <body className={`${poppins.className} antialiased`}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           {children}
         </Providers>

@@ -1,6 +1,6 @@
 import DashboardHeader from "@/ui/dashboard/dashboard-header";
 import { Link } from "@nextui-org/link";
-import {siteConfig} from "@/config/site";
+import { siteConfig } from "@/config/site";
 
 export default function Layout({
   children,
@@ -9,11 +9,11 @@ export default function Layout({
 }) {
   return (
     <div>
-      <div className="relative flex flex-col h-screen">
+      <div className="relative flex flex-col">
         <DashboardHeader />
-        <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+        <div className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
           {children}
-        </main>
+        </div>
         <footer className="w-full flex items-center justify-center py-3">
           <Link
             isExternal
