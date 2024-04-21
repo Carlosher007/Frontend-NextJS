@@ -1,7 +1,8 @@
+'use client'
 import LandingHeader from '@/ui/landing/landing-header'
 import LandingLeftSection from '@/ui/landing/landing-leftSection';
 import LandingRightSection from '@/ui/landing/landing-rightSection';
-import Link from 'next/link';
+
 
 export default function Page() {
   return (
