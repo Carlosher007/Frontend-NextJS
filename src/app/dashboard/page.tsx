@@ -6,9 +6,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col">
-      {Array.from({ length: 100 }, (_, index) => (
-        <h1 key={index}>Hola</h1>
-      ))}
+      <h1>Hola</h1>
     </div>
   );
 }

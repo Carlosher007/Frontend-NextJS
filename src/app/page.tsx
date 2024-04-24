@@ -10,7 +10,7 @@ export default function Page() {
       <LandingHeader />
       <section className="flex flex-col items-center justify-center mt-10 p-24 py-5 gap-24 md:flex-row woverflow-hidden">
         <LandingLeftSection />
-        {/* <LandingRightSection /> */}
+        <LandingRightSection />
       </section>
     </div>
   );
