@@ -4,12 +4,15 @@ import { NextImageProps } from "./NextImage.props";
 import { PencilIcon, TrashIcon } from "@/ui/components/icons";
 import ImageModal from "../ImageModal/ImageModal";
 import ConfirmModal from "@/ui/components/ConfirmModal/ConfirmModal";
+import { deleteImage } from "../Service/Service";
+import { toast } from "sonner";
 
 export default function NextImage({
   photo,
   imageProps: { src, alt, title, sizes, className, onClick },
   wrapperStyle,
-  mode = "public"
+  mode = "public",
+  onSucces
 }: NextImageProps | any) {
 
   const {
@@ -30,9 +33,17 @@ export default function NextImage({
     onCloseImageModal()
   }
 
-  const onConfirmDeleteModal = () => {
-    console.log("Delete image: ", photo)
-    onCloseDeleteModal()
+  const onConfirmDeleteModal = async () => {
+    try 
+    {
+      const res: Response = await deleteImage(photo.imageId);
+      const resTxt: string = await res.text();
+      if (res.status !== 200) throw new Error(resTxt)
+      toast.success(resTxt);
+    } catch (err) 
+    {
+      toast.error((err as Error).message)
+    } finally { onCloseDeleteModal(); await onSucces() }
   }
 
   return (
@@ -63,7 +74,7 @@ export default function NextImage({
           </Button>
         </div>
 
-        <ImageModal isOpen={isOpenImageModal} onOpenChange={onOpenChangeEditModal} onClose={onCloseImageModal} mode="edit" image={photo}/>
+        <ImageModal isOpen={isOpenImageModal} onOpenChange={onOpenChangeEditModal} onClose={onCloseImageModal} mode="edit" image={photo} onSucces={() => {}}/>
         <ConfirmModal isOpen={isOpenDeleteModal} onConfirm={onConfirmDeleteModal} onClose={onCloseDeleteModal} />
         </>
       }

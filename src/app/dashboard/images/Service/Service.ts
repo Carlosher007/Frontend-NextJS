@@ -58,3 +58,16 @@ export const uploadImage = async (imageData: any) => {
         throw new Error((err as Error).message)
     }
 }
+
+export const deleteImage = async (imageId: string) => {
+    try 
+    {
+        const _delete = await fetch(`${BASE_URL}/Image/delete-image/${imageId}`, {
+            method: 'delete',
+        });
+        return _delete;
+    }
+    catch (err) {
+        throw new Error("An unespected error happened")
+    }
+};

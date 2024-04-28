@@ -42,7 +42,7 @@ export default function Page() {
             <PhotoAlbum 
                 layout="rows"
                 photos={images}
-                renderPhoto={ (props) => (<NextImage mode={mode} {...props}/>) }
+                renderPhoto={ (props) => (<NextImage mode={mode} onSucces={_getImages} {...props}/>) }
                 sizes={{ size: "100vw" }}
             />
 
