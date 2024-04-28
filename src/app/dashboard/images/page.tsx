@@ -1,15 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PhotoAlbum from "react-photo-album";
 import NextImage from "./NextImage/NextImage";
 import { getImages } from "./Service/Service";
 import { Button, ButtonGroup, useDisclosure } from "@nextui-org/react";
 import ImageModal from "./ImageModal/ImageModal";
+import { Image } from "@/types";
 
 export default function Page() {
-    const images = getImages();
+    const [images, setImages] = useState<Image[]>([])
     const [mode, setMode] = useState<"public" | "private">("public");
     const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+
+    useEffect(() => {
+        const _getImages = async () => setImages(await getImages());
+        _getImages();
+    },[])
 
     return (
         <div className="flex flex-col gap-4">
