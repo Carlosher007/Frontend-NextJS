@@ -39,15 +39,22 @@ export const getCategories: () => Promise<Category[]> = async () => {
 }
 
 export const uploadImage = async (imageData: any) => {
-    let data = new FormData();
-    data.append("image", imageData.image[0])
-    data.append("name", imageData.name)
-    data.append("description", imageData.description)
-    data.append("categories", imageData.categories)
+    try 
+    {
+        let data = new FormData();
+        data.append("image", imageData.image[0])
+        data.append("categories[]", JSON.stringify(imageData.categories))
+        Object.keys(imageData)
+            .filter(key => !["image", "categories"].includes(key))
+            .map(key => data.append(key, imageData[key]))
 
-    const post = await fetch(`${BASE_URL}/Image/upload-image`, {
-        method: 'post',
-        body: data,
-    });
-    return await post.text();
+        const post = await fetch(`${BASE_URL}/Image/upload-image`, {
+            method: 'post',
+            body: data,
+        });
+        return post;
+    } catch (err) 
+    {
+        throw new Error((err as Error).message)
+    }
 }

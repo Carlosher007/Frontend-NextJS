@@ -6,4 +6,5 @@ export type ImageModalProps = {
     onOpenChange: () => void
     onClose: () => void
     image?: undefined | any
+    onSucces: () => any
 } & modalType;

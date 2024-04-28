@@ -3,7 +3,7 @@ import React from 'react'
 import { ImageModalProps } from './ImageModal.props'
 import ImageModalForm from './ImageModalForm/ImageModalForm'
 
-export default function ImageModal({isOpen, onOpenChange, mode, image, ...props}: ImageModalProps) {
+export default function ImageModal({isOpen, onOpenChange, mode, image, onSucces, ...props}: ImageModalProps) {
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} scrollBehavior='inside' {...props} >
             <ModalContent>
@@ -14,7 +14,12 @@ export default function ImageModal({isOpen, onOpenChange, mode, image, ...props}
                     {mode === "edit" && "Edit Image"}
                 </ModalHeader>
                 <ModalBody>
-                    <ImageModalForm id="imageForm" mode={mode} image={image}/>
+                    <ImageModalForm 
+                        id="imageForm" 
+                        mode={mode} 
+                        image={image}
+                        onSucces={async() => {await onSucces(); onClose()}}
+                        />
                 </ModalBody>
                 <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>

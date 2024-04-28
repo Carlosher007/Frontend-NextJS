@@ -5,8 +5,8 @@ import { ImageModalFormProps } from './ImageModalForm.props';
 import { CldImage } from 'next-cloudinary';
 import { getCategories, uploadImage } from '../../Service/Service';
 import { useForm, SubmitHandler } from "react-hook-form"
-import { objectToFormData } from '../../utils/utils';
 import { Category } from '@/types';
+import { toast } from 'sonner'
 
 type ImageForm = {
     image: File[]
@@ -17,7 +17,7 @@ type ImageForm = {
     price?: number
 };
 
-export default function ImageModalForm({image, mode, ...props}:ImageModalFormProps) {
+export default function ImageModalForm({image, mode, onSucces, ...props}:ImageModalFormProps) {
 
     const [categories, setCategories] = useState<Category[]>([])
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
@@ -38,13 +38,15 @@ export default function ImageModalForm({image, mode, ...props}:ImageModalFormPro
     const watchSelectedImg = watch("image", undefined)
 
     const onSubmit: SubmitHandler<ImageForm> = async (data) => {
-
         try {
-            console.log(data)
-            const res = await uploadImage(data);
-            console.log(res)
+            const res: Response = await uploadImage(data);
+            const resTxt: string = await res.text();
+            if (res.status !== 200) throw new Error(resTxt)
+            toast.success(resTxt)
+            await onSucces()
         } catch (err){
-            console.log(err)
+            console.log("sss")
+            toast.error((err as Error).message)
         }
     }
 

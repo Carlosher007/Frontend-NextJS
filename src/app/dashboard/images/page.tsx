@@ -6,14 +6,15 @@ import { getImages } from "./Service/Service";
 import { Button, ButtonGroup, useDisclosure } from "@nextui-org/react";
 import ImageModal from "./ImageModal/ImageModal";
 import { Image } from "@/types";
+import { Toaster } from "sonner";
 
 export default function Page() {
     const [images, setImages] = useState<Image[]>([])
     const [mode, setMode] = useState<"public" | "private">("public");
     const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
 
+    const _getImages = async () => setImages(await getImages());
     useEffect(() => {
-        const _getImages = async () => setImages(await getImages());
         _getImages();
     },[])
 
@@ -49,7 +50,10 @@ export default function Page() {
                 isOpen={isOpen} 
                 onOpenChange={onOpenChange} 
                 onClose={onClose} 
-                mode="upload"/>
+                mode="upload"
+                onSucces={_getImages}/>
+                
+            <Toaster position="top-center" richColors />
         </div>
     );
 }
