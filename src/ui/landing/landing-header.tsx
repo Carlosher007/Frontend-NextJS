@@ -1,5 +1,5 @@
 import Link from 'next/link'
-
+import { ThemeSwitch } from '@/ui/components/theme-switch'
 export default function LandingHeader() {
   return (
     <header className="w-full flex md:justify-between justify-center py-10 px-20">
@@ -17,6 +17,9 @@ export default function LandingHeader() {
           >
             Register
           </Link>
+        </li>
+        <li>
+          <ThemeSwitch />
         </li>
       </ul>
     </header>

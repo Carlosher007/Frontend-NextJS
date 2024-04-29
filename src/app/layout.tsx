@@ -30,7 +30,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           {children}
         </Providers>
-      </body>   
+      </body>
     </html>
   );
 }

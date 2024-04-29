@@ -13,15 +13,15 @@ const config = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        backgroundSecondary: 'var(--background-secondary)',
-        foreground: 'var(--foreground)',
-        foregroundSecondary: 'var(--foreground-secondary)',
-        foregroundTertiary: 'var(--foreground-tertiary)',
-        primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
-        },
+        background: '#222',
+        foreground: '#fff',
+
+        backgroundSecondary: '#1a1f24',
+        foregroundSecondary: '#999',
+        foregroundTertiary: '#0f0',
+
+        primary: '#fff',
+        primaryForeground: '#222',
       },
     },
   },
