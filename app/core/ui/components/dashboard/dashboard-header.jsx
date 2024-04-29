@@ -15,16 +15,16 @@ import {
 } from "@nextui-org/react";
 
 
-import { siteConfig } from "@/app/config/site";
+import { siteConfig } from "@/app/core/config/site";
 import NextLink from "next/link";
 
-import { ThemeSwitch } from "@/app/ui/components/dashboard/theme-switch";
+import { ThemeSwitch } from "./theme-switch";
 import {
   GithubIcon,
   AcademicFilledIcon,
   SearchIcon,
   Logo
-} from "@/app/ui/icons";
+} from "@/app/core/ui/icons";
 
 
 export default function DashboardHeader() {

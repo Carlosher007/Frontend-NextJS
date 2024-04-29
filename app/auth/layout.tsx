@@ -1,5 +1,5 @@
-import '@/app/ui/global.css';
-import { poppins } from "@/app/config/fonts";
+import '@/app/core/ui/global.css';
+import { poppins } from "@/app/core/config/fonts";
 
 export default function RootLayout({
   children,

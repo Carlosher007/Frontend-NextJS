@@ -1,8 +1,8 @@
-import '@/app/ui/global.css';
+import '@/app/core/ui/global.css';
 import { Providers } from '@/app/providers';
 import { Metadata } from 'next'
-import { siteConfig } from '@/app/config/site';
-import { poppins } from '@/app/config/fonts';
+import { siteConfig } from '@/app/core/config/site';
+import { poppins } from '@/app/core/config/fonts';
 
 export const metadata: Metadata = {
   title: {

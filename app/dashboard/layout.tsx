@@ -1,6 +1,6 @@
-import DashboardHeader from "@/app/ui/components/dashboard/dashboard-header";
+import DashboardHeader from "@/app/core/ui/components/dashboard/dashboard-header";
 import { Link } from "@nextui-org/react";
-import { siteConfig } from "@/app/config/site";
+import { siteConfig } from "@/app/core/config/site";
 
 export default function Layout({
   children,
