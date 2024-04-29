@@ -1,8 +1,8 @@
-import "@/ui/globals.css";
-import { poppins } from "@/config/fonts";
-import { Providers } from "@/app/providers";
-import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import '@/app/ui/global.css';
+import { Providers } from '@/app/providers';
+import { Metadata } from 'next'
+import { siteConfig } from '@/app/config/site';
+import { poppins } from '@/app/config/fonts';
 
 export const metadata: Metadata = {
   title: {
@@ -10,10 +10,6 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   icons: {
     icon: "/favicon.ico",
   },
@@ -25,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           {children}

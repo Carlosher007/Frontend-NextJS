@@ -1,5 +1,5 @@
 // import './left-section.css'
-import { kanit, poppins } from '../../config/fonts'
+import { kanit, poppins } from '@/app/config/fonts'
 import Link from 'next/link'
 
 export default function LandingLeftSection() {
@@ -8,7 +8,7 @@ export default function LandingLeftSection() {
       <h2 className="text-6xl">
         The best place to buy and sell <b className="text-foregroundTertiary">Images</b>
       </h2>
-      <p className=" text-lg mt-2">
+      <p className="text-foregroundSecondary text-lg mt-2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque excepturi iusto facilis porro veritatis soluta.
       </p>
       <div className='mt-6'>

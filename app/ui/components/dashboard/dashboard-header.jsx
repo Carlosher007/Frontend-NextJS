@@ -8,29 +8,24 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
+  Button,
+  Kbd,
+  Link,
+  Input
+} from "@nextui-org/react";
 
-import { link as linkStyles } from "@nextui-org/theme";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/app/config/site";
 import NextLink from "next/link";
-import clsx from "clsx";
 
-import { ThemeSwitch } from "@/ui/components/theme-switch";
+import { ThemeSwitch } from "@/app/ui/components/dashboard/theme-switch";
 import {
-  TwitterIcon,
   GithubIcon,
-  DiscordIcon,
   AcademicFilledIcon,
   SearchIcon,
-} from "@/ui/components/icons";
+  Logo
+} from "@/app/ui/icons";
 
-import { Logo } from "@/ui/components/icons";
-import { useEffect } from "react";
 
 export default function DashboardHeader() {
   const searchInput = (
@@ -87,7 +82,7 @@ export default function DashboardHeader() {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu>
+      <NavbarMenu className="">
         {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (

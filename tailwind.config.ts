@@ -1,15 +1,13 @@
 import type { Config } from 'tailwindcss';
-import { nextui } from '@nextui-org/theme';
+const { nextui } = require('@nextui-org/react');
 
-const config = {
+const config: Config = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
-  prefix: '',
   theme: {
     extend: {
       colors: {
@@ -27,6 +25,5 @@ const config = {
   },
   darkMode: 'class',
   plugins: [require('tailwindcss-animate'), nextui()],
-} satisfies Config;
-
+};
 export default config;

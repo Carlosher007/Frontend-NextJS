@@ -1,8 +1,7 @@
-import LandingHeader from '@/ui/landing/landing-header'
-import LandingLeftSection from '@/ui/landing/landing-leftSection';
-import LandingRightSection from '@/ui/landing/landing-rightSection';
+import LandingHeader from '@/app/ui/components/landing/landing-header'
+import LandingLeftSection from '@/app/ui/components/landing/landing-leftSection';
+import LandingRightSection from '@/app/ui/components/landing/landing-rightSection';
 
-//TODO 1: Do that this design change with the black and white mode (use zustand and clsx)
 
 export default function Page() {
   return (
