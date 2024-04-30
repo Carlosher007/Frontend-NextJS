@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@layer base {
+  .dark {
+    --background: #222;
+    --background-secondary: #1a1f24;
+    --foreground: #fff;
+    --foreground-secondary: #999;
+    --foreground-tertiary: #0f0;
+
+    --primary: #fff;
+    --primary-foreground: #222;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+  }
+}

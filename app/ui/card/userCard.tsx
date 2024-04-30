@@ -3,7 +3,6 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure
   Card, CardHeader, CardBody, CardFooter, Image, Button, Input} from "@nextui-org/react";
 import { PencilIcon } from "./PencilIcon";
 import { TrashIcon } from "./TrashIcon";
-import { deleteCard } from '../../util/api/api'
 
 export default function userCard(
   { cardId, cardNumber, expirationDate, cvcCode, ownerName, handleEdit, handleDelete }: 

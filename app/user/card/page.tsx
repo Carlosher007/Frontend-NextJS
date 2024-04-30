@@ -1,8 +1,8 @@
 "use client";
 
 import {Suspense, useEffect, useState} from 'react'
-import UserCards from '../../../ui/card/userCards'
-import SkeletonOrder from '../../../ui/skeletons/skeletonOrder'
+import UserCards from '../../ui/card/userCards'
+import SkeletonOrder from '../../ui/skeletons/skeletonOrder'
 const page = () => {
   return (
     <div>
