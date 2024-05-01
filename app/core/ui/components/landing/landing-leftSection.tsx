@@ -17,5 +17,3 @@ export default function LandingLeftSection() {
     </div>
   )
 }
-
-//  uppercase font - medium mt - 6 tracking - wider transition - all duration - 500 ease -in -out w - 64 flex items - center justify - center hover: tracking - widest
