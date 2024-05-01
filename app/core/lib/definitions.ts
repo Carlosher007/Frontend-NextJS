@@ -9,8 +9,8 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 export type User = {
   id: string;
-  name: string;
+  username: string;
   email: string;
-  password: string;
+  firstName?: string;
+  lastName?: string;
 };
-

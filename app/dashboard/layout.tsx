@@ -21,7 +21,7 @@ export default function Layout({
           title="nextui.org homepage"
         >
           <span className="text-default-600">ImageHub by</span>
-          <p className="text-primary">Univalle</p>
+          <p>Univalle</p>
         </Link>
       </footer>
     </div>

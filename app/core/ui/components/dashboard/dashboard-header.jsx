@@ -28,6 +28,7 @@ import {
 
 
 export default function DashboardHeader() {
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -69,7 +70,9 @@ export default function DashboardHeader() {
             startContent={<AcademicFilledIcon className="text-danger" />}
             variant="flat"
           >
-            Univalle
+            <span className="text-red-500 dark:text-green-500">
+              Univalle
+            </span>
           </Button>
         </NavbarItem>
       </NavbarContent>
@@ -82,8 +85,7 @@ export default function DashboardHeader() {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu className="">
-        {searchInput}
+      <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
