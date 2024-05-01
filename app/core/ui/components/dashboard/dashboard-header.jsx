@@ -85,7 +85,7 @@ export default function DashboardHeader() {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu>
+      <NavbarMenu className="bg-white dark:bg-darkBackground">
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
@@ -98,7 +98,11 @@ export default function DashboardHeader() {
                 href={item.href}
                 size="lg"
               >
-                {item.label}
+                <span className={` ${index === siteConfig.navMenuItems.length - 1
+                  ? "danger"
+                  : "text-black dark:text-foreground"}`}>
+                  {item.label}
+                </span>
               </Link>
             </NavbarMenuItem>
           ))}

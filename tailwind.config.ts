@@ -11,15 +11,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#222',
-        foreground: '#fff',
+        //Dark Mode
+        darkBackground: '#222',
+        darkForeground: '#fff',
 
-        backgroundSecondary: '#1a1f24',
-        foregroundSecondary: '#999',
-        foregroundTertiary: '#0f0',
+        darkHover: '#999',
+        darkHighlightedForeground: '#76ABAE',
 
-        primary: '#fff',
-        primaryForeground: '#222',
+        darkButtonBackground: '#fff',
+        darkButtonForeground: '#000',
+
+        //Light Mode
+        lightBackground: '#fff',
+        lightForeground: '#000',
+
+        lightHover: '#31363F',
+        lightHighlightedForeground: '#153448',
+
+        lightButtonBackground: '#000',
+        lightButtonForeground: '#fff',
       },
     },
   },

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ThemeSwitch } from '../dashboard/theme-switch'
 
 export default function LandingHeader() {
   return (
@@ -6,14 +7,17 @@ export default function LandingHeader() {
       <h1 className="text-2xl uppercase font-bold tracking-wider">Imagehub</h1>
       <ul className="hidden md:flex space-x-10">
         <li>
+          <ThemeSwitch />
+        </li>
+        <li>
           <Link href="/auth/login">
-            <span className='uppercase tracking-wider transition-colors duration-500 hover:text-foregroundSecondary'>Login</span>
+            <span className='uppercase tracking-wider transition-colors duration-500 hover:text-lightHover dark:hover:text-darkHover'>Login</span>
           </Link>
         </li>
         <li>
           <Link
             href="/auth/register"
-            className='uppercase tracking-wider transition-colors duration-500  hover:text-foregroundSecondary'
+            className='uppercase tracking-wider transition-colors duration-500 hover:text  hover:text-lightHover dark:hover:text-darkHove'
           >
             Register
           </Link>

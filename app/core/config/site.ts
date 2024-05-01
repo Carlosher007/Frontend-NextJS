@@ -1,6 +1,6 @@
 export type SiteConfig = typeof siteConfig;
 
-const logged = false;
+const logged = true;
 
 export const siteConfig = {
   name: 'ImageHub',
