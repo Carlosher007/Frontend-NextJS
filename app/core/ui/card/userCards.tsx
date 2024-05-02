@@ -1,12 +1,14 @@
 "use client";
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, 
-  Card, CardHeader, CardBody, CardFooter, Image, Button, Input} from "@nextui-org/react";
-import { getCard, addCard, editCard, deleteCard } from '../../util/api/api'
+import {
+  Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure,
+  Card, CardHeader, CardBody, CardFooter, Image, Button, Input
+} from "@nextui-org/react";
+import { getCard, addCard, editCard, deleteCard } from '../../api/api'
 import { useEffect, useState } from 'react'
 import UserCard from './userCard'
 
-export default function UserCards({user_id}: {user_id: number}) {
+export default function UserCards({ user_id }: { user_id: number }) {
 
   interface Card {
     card_id: string;
@@ -73,7 +75,7 @@ export default function UserCards({user_id}: {user_id: number}) {
     }
   }
 
-  const handleEdit = async(e: React.FormEvent<HTMLFormElement>, cardId: string) => {
+  const handleEdit = async (e: React.FormEvent<HTMLFormElement>, cardId: string) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -82,7 +84,7 @@ export default function UserCards({user_id}: {user_id: number}) {
     if (!originalCard) {
       throw new Error(`No card found with id ${cardId}`);
     }
-    
+
     const card_number = formData.get('card_number') || originalCard.card_number;
     const expiration_date = formData.get('expiration_date') || originalCard.expiration_date;
     const cvc_code = formData.get('cvc_code') || originalCard.cvc_code;
@@ -112,49 +114,49 @@ export default function UserCards({user_id}: {user_id: number}) {
           expirationDate={formatDate(card.expiration_date)}
           cvcCode={card.cvc_code}
           ownerName={card.owner_name}
-          handleEdit={handleEdit} 
+          handleEdit={handleEdit}
           handleDelete={handleDelete} />
       ))}
       {!loading && (
-      <Card 
-        isPressable 
-        onPress={modalAdd.onOpen}
-        className="h-72 min-w-96 max-w-[440px] w-full relative flex items-center justify-center">
-        <div className="place-content-center">
-          <p className="text-9xl">+</p>
-          <Modal 
-          isOpen={modalAdd.isOpen} 
-          onOpenChange={modalAdd.onOpenChange} 
-          placement='center' 
-          onClick={(e) => e.stopPropagation()}>
-            <ModalContent>
-              {(onClose) => (
-                <>
-                  <form onSubmit={handleAdd}>
-                    <ModalHeader className="flex flex-col gap-1">Add your card</ModalHeader>
-                    <ModalBody>
-                      <div className="grid grid-cols-1 gap-4">
-                        <Input type="text" name="card_number" label="Card Number" />
-                        <Input type="date" name="expiration_date" label="Expiration date" />
-                        <Input type="string" name="cvc_code" label="CVC" />
-                        <Input type="text" name="owner_name" label="Owner name" />
-                      </div>
-                    </ModalBody>
-                    <ModalFooter>
-                      <Button color="danger" variant="light" onPress={onClose}>
-                        Cancel
-                      </Button>
-                      <Button type="submit" color="primary" onPress={onClose}>
-                        Add
-                      </Button>
-                    </ModalFooter>
-                  </form>
-                </>
-              )}
-            </ModalContent>
-          </Modal>
-        </div>
-      </Card>)}
+        <Card
+          isPressable
+          onPress={modalAdd.onOpen}
+          className="h-72 min-w-96 max-w-[440px] w-full relative flex items-center justify-center">
+          <div className="place-content-center">
+            <p className="text-9xl">+</p>
+            <Modal
+              isOpen={modalAdd.isOpen}
+              onOpenChange={modalAdd.onOpenChange}
+              placement='center'
+              onClick={(e) => e.stopPropagation()}>
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <form onSubmit={handleAdd}>
+                      <ModalHeader className="flex flex-col gap-1">Add your card</ModalHeader>
+                      <ModalBody>
+                        <div className="grid grid-cols-1 gap-4">
+                          <Input type="text" name="card_number" label="Card Number" />
+                          <Input type="date" name="expiration_date" label="Expiration date" />
+                          <Input type="string" name="cvc_code" label="CVC" />
+                          <Input type="text" name="owner_name" label="Owner name" />
+                        </div>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button color="danger" variant="light" onPress={onClose}>
+                          Cancel
+                        </Button>
+                        <Button type="submit" color="primary" onPress={onClose}>
+                          Add
+                        </Button>
+                      </ModalFooter>
+                    </form>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
+          </div>
+        </Card>)}
     </div>
   )
 }

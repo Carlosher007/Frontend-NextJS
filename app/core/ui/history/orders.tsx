@@ -1,6 +1,6 @@
 "use client";
 
-import { getAll } from '../../util/api/api'
+import { getAll } from '../../api/api'
 import { useEffect, useState } from 'react'
 import OrderCard from './orderCard'
 export default function Orders() {
