@@ -3,59 +3,62 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { ImageModalFormProps } from './ImageModalForm.props';
 import { CldImage } from 'next-cloudinary';
-import { getCategories, uploadImage } from '@/app/core/api/dashboardImages/service';
+import { getCategories, updateImage, uploadImage } from '@/app/core/api/dashboardImages/service';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Category } from '@/app/core/lib/definitions';
 import { toast } from 'sonner'
+import { AnyCnameRecord } from 'dns';
 
 type ImageForm = {
     image: File[]
     creator?: number
     name: string
-    categories: string | number[] | undefined // Json.parse(number[])
+    categories: string // Json.parse(number[])
     description?: string
     price?: number
 };
 
 export default function ImageModalForm({ image, mode, onSucces, ...props }: ImageModalFormProps) {
-
+    const viewMode = mode === "view";
     const [categories, setCategories] = useState<Category[]>([])
-    const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
+    const [_selectedCategories, _setSelectedCategories] = useState<Set<number> | any>(image ? new Set(image.imagecategories.map(ic => ic.category.categoryId)) : new Set())
 
-    const onSelectCategory = (e: any) => {
-        if (!e.target.value) return;
-        const categorySelected = JSON.parse(e.target.value)
-
-        if (selectedCategories.map(sc => sc.category_id).includes(categorySelected.category_id)) return;
-        setSelectedCategories([...selectedCategories, categorySelected])
-    }
-
-    const onRemoveCategory = (removedCategoryId: number) => {
-        setSelectedCategories(selectedCategories.filter(sc => sc.category_id != removedCategoryId))
-    }
-
-    const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ImageForm>()
+    const { register, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm<ImageForm>()
     const watchSelectedImg = watch("image", undefined)
+
+    const handleSelectionChange = (e:any) => {
+        const newSelectedCategories = new Set(e.target.value.split(","));
+        _setSelectedCategories(newSelectedCategories);
+        setValue("categories", e.target.value.split(",").filter((str:string) => str !== "").join(","))
+      };
 
     const onSubmit: SubmitHandler<ImageForm> = async (data) => {
         try {
-            const res: Response = await uploadImage(data);
+            let res = null;
+            if (image){
+                console.log(data)
+                res = await updateImage(data, image.imageId);
+            }
+            else{
+                res = await uploadImage(data);
+            }
             const resTxt: string = await res.text();
             if (res.status !== 200) throw new Error(resTxt)
             toast.success(resTxt)
             await onSucces()
         } catch (err) {
-            console.log("sss")
             toast.error((err as Error).message)
         }
     }
 
     useEffect(() => {
-        selectedCategories.length > 0 ?
-            setValue("categories", selectedCategories.map(sc => sc.category_id))
-            :
-            setValue("categories", undefined)
-    }, [selectedCategories])
+        if (image){
+            setValue("name", image.name)
+            setValue("description", image.description)
+            setValue("price", image.price)
+            setValue("categories", image.imagecategories.map(ic => ic.category.categoryId).join(","))
+        }
+    }, [image])
 
     useEffect(() => {
         const _setCategories = async () => setCategories(await getCategories());
@@ -85,7 +88,7 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
                     }
                 </>
             }
-            {mode === "edit" &&
+            {(mode === "edit" || mode === "view") &&
                 <>
                     {image &&
                         <CldImage
@@ -102,39 +105,39 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
                 placeholder="Enter the name"
                 type="text"
                 label="Name"
+                disabled={viewMode}
                 {...register("name", { required: true })}
             />
             <Textarea
-                placeholder="Enter the description (optional)"
+                placeholder={viewMode ? "No description" : "Enter the description (optional)"}
                 label="Description"
+                disabled={viewMode}
                 {...register("description")} />
             <Input
                 placeholder="Free"
                 type="number"
                 label="Price"
+                onClick={() => console.log(errors)}
                 min={0}
+                disabled={viewMode}
                 {...register("price")} />
             <Select
-                color={selectedCategories.length <= 0 ? "warning" : "default"}
-                label="Select a category"
-                {...register("categories", { required: true })}
-                onChange={onSelectCategory}>
+                color={_selectedCategories.size <= 0 ? "warning" : "default"}
+                label="Categories"
+                selectionMode="multiple"
+                selectedKeys={_selectedCategories}
+                {...register("categories", { required: false })}
+                onChange={handleSelectionChange}
+                isDisabled={viewMode}
+                >
                 {categories.map(category =>
                     <SelectItem
-                        key={JSON.stringify(category)}>
+                        value={category.categoryId}
+                        key={category.categoryId}>
                         {category.name}
                     </SelectItem>
                 )}
             </Select>
-            <div className='flex flex-row gap-2'>
-                {selectedCategories.map(selectedCategory =>
-                    <Chip
-                        onClose={() => onRemoveCategory(selectedCategory.category_id)}
-                        key={selectedCategory.category_id}>
-                        {selectedCategory.name}
-                    </Chip>
-                )}
-            </div>
         </form>
     )
 }

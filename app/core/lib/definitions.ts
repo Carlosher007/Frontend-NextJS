@@ -27,10 +27,15 @@ export type Image = {
   isDefault: boolean;
   width: number;
   height: number;
+  imagecategories: ImageCategory[];
 };
 
+export type ImageCategory = {
+  category: Category
+}
+
 export type Category = {
-  category_id: number;
+  categoryId: number;
   name: string;
   description: string;
 };

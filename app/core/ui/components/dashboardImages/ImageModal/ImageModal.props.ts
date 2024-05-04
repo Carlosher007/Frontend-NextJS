@@ -1,7 +1,7 @@
 import { ModalProps } from '@nextui-org/react';
 
 type modalType = {
-  mode: 'upload' | 'edit';
+  mode: 'upload' | 'edit' | 'view';
 };
 
 export type ImageModalProps = {

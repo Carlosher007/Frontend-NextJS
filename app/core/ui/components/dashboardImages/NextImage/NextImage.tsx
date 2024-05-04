@@ -33,6 +33,10 @@ export default function NextImage({
     onCloseImageModal()
   }
 
+  const onAddToCart = () => {
+    console.log(photo)
+  }
+
   const onConfirmDeleteModal = async () => {
     try {
       const res: Response = await deleteImage(photo.imageId);
@@ -52,7 +56,8 @@ export default function NextImage({
         loading="lazy"
         placeholder={"blurDataURL" in photo ? "blur" : undefined}
         className="rounded-lg hover:opacity-80 hover:cursor-pointer"
-        {...{ alt, title, sizes, onClick }}
+        onClick={onOpenImageModal}
+        {...{ alt, title, sizes }}
       />
       {mode === "private" &&
         <>
@@ -72,10 +77,25 @@ export default function NextImage({
             </Button>
           </div>
 
-          <ImageModal isOpen={isOpenImageModal} onOpenChange={onOpenChangeEditModal} onClose={onCloseImageModal} mode="edit" image={photo} onSucces={() => { }} />
+          <ImageModal isOpen={isOpenImageModal} onOpenChange={onOpenChangeEditModal} onClose={onCloseImageModal} mode="edit" image={photo} onSucces={onSucces} />
           <ConfirmModal isOpen={isOpenDeleteModal} onConfirm={onConfirmDeleteModal} onClose={onCloseDeleteModal} />
         </>
       }
+      {mode === "public" &&
+        <>
+        <div className="flex flex-col">
+            <Button
+              isIconOnly
+              color="danger"
+              className="m-1"
+              onPress={onAddToCart}>
+              Cart
+            </Button>
+          </div>
+          <ImageModal isOpen={isOpenImageModal} onOpenChange={onOpenChangeEditModal} onClose={onCloseImageModal} mode="view" image={photo} onSucces={onSucces} />
+        </>
+      }
+      
     </div>
   );
 }
