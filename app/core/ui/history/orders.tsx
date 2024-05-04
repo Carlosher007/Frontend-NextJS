@@ -27,7 +27,7 @@ export default function Orders() {
 
     return (
         <div>
-            <h1 className='text-2xl mx-8 mb-8'>Historial</h1>
+            {data != null ? <></> : <h1 className='text-2xl mx-8 mb-8'>Historial</h1>}
             {data.map((order: {
                 order_id: number, order_date: string, payment_method: string, total_price: number
             }) => (
