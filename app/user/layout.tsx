@@ -1,5 +1,5 @@
-import "@/app/ui/globals.css";
-import { poppins } from "@/config/fonts";
+import '@/app/core/ui/global.css';
+import { poppins } from '@/app/core/config/fonts';
 
 export default function RootLayout({
     children,
@@ -7,7 +7,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className={`${poppins.className} antialiased p-10`}>
+        <div className={`${poppins.className} antialiased`}>
             {children}
         </div>
     );

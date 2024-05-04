@@ -24,6 +24,7 @@ const config: Config = {
         //Light Mode
         lightBackground: '#fff',
         lightForeground: '#000',
+        lightForegroundSecondary: '#F4F6F7',
 
         lightHover: '#31363F',
         lightHighlightedForeground: '#153448',
