@@ -1,5 +1,5 @@
-import DashboardHeader from "@/app/core/ui/components/dashboard/dashboard-header";
-import { Link } from "@nextui-org/react";
+import { Navbar } from "@/app/core/ui/components/dashboard/dashboard-header";
+import { Link } from "@nextui-org/link";
 import { siteConfig } from "@/app/core/config/site";
 
 export default function Layout({
@@ -9,7 +9,7 @@ export default function Layout({
 }) {
   return (
     <div className="flex flex-col min-h-screen">
-      <DashboardHeader />
+      <Navbar />
       <div className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
         {children}
       </div>
