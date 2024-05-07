@@ -12,6 +12,7 @@ const config: Config = {
         //Dark Mode
         darkBackground: '#222',
         darkForeground: '#fff',
+        darkForegroundSecondary: '#30302E',
 
         darkHover: '#999',
         darkHighlightedForeground: '#76ABAE',
@@ -21,7 +22,8 @@ const config: Config = {
 
         //Light Mode
         lightBackground: '#fff',
-        lightForeground: '#000',
+        lightForeground: '#1F2328',
+        lightForegroundSecondary: '#F4F6F7',
 
         lightHover: '#31363F',
         lightHighlightedForeground: '#153448',
