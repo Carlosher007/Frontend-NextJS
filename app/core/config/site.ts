@@ -5,6 +5,20 @@ const logged = true;
 export const siteConfig = {
   name: 'ImageHub',
   description: 'The best web application to sell and buy images',
+  navItems: [
+    {
+      label: 'Home',
+      href: '/dashboard',
+    },
+    {
+      label: 'Images',
+      href: '/dashboard/images',
+    },
+    logged && {
+      label: 'Logout',
+      href: '/logout',
+    },
+  ],
   navMenuItems: [
     {
       label: 'Home',
