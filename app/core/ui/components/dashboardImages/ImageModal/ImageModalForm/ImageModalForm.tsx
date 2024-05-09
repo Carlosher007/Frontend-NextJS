@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { Category } from '@/app/core/lib/definitions';
 import { toast } from 'sonner'
 import { AnyCnameRecord } from 'dns';
+import { useUserStore } from '@/app/core/store';
 
 type ImageForm = {
     image: File[]
@@ -25,6 +26,7 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
 
     const { register, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm<ImageForm>()
     const watchSelectedImg = watch("image", undefined)
+    const userId = useUserStore(state => state.id);
 
     const handleSelectionChange = (e:any) => {
         const newSelectedCategories = new Set(e.target.value.split(","));
@@ -40,7 +42,7 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
                 res = await updateImage(data, image.imageId);
             }
             else{
-                res = await uploadImage(data);
+                res = await uploadImage({...data, creator:Number(userId)});
             }
             const resTxt: string = await res.text();
             if (res.status !== 200) throw new Error(resTxt)

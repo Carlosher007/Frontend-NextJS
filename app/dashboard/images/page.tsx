@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import PhotoAlbum from "react-photo-album";
 import NextImage from "@/app/core/ui/components/dashboardImages/NextImage/NextImage";
-import { getImages } from "../../core/api/dashboardImages/service";
+import { getImages, getUserImages } from "../../core/api/dashboardImages/service";
 import { Button, ButtonGroup, useDisclosure } from "@nextui-org/react";
 import ImageModal from "@/app/core/ui/components/dashboardImages/ImageModal/ImageModal";
 import { Image } from "@/app/core/lib/definitions";
 import { Toaster } from "sonner";
 import {useFilters} from '@/app/core/hooks/useFilters'
 import { Filters } from "@/app/core/ui/components/shoppingcart/Filters";
+import { useUserStore } from "@/app/core/store";
+import { number } from "zod";
 
 export default function Page() {
     const [images, setImages] = useState<Image[]>([])
@@ -16,11 +18,18 @@ export default function Page() {
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
     const {filterImages} = useFilters()
     const filteredImages = filterImages(images)
+    const userId = useUserStore(state => state.id);
 
-    const _getImages = async () => setImages(await getImages());
+    const _getImages = async () => {
+        if (mode == "public"){
+            setImages(await getImages())
+            return;
+        }
+        setImages(await getUserImages(userId))
+    };
     useEffect(() => {
         _getImages();
-    }, [])
+    }, [mode])
 
     return (
         <div className="flex flex-col gap-4">
