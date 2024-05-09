@@ -5,6 +5,7 @@ import { Images } from '@/app/core/ui/components/shoppingcart/Images'
 import { useState } from 'react'
 import { Header } from '@/app/core/ui/components/shoppingcart/Header'
 import {useFilters} from '@/app/core/hooks/useFilters'
+import { Cart } from '@/app/core/ui/components/shoppingcart/Cart'
 
 
 export default function Page() {
@@ -16,6 +17,7 @@ export default function Page() {
   return (
     <>
       <Header/>
+      {/* <Cart /> */}
       <Images images={filteredImages} />
     </>
   )

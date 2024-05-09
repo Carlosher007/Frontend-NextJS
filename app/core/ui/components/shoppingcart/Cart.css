@@ -1,14 +1,24 @@
 .cart {
-  background: #000;
+  background: #1b1b1b;
   display: none;
   padding: 32px;
   position: fixed;
   right: 0px;
   top: 0px;
-  width: 200px;
+  width: 250px;
+  z-index: 999;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
-.cart img {
+.cart * {
+  max-width: 100%;
+}
+
+.cart Image {
   aspect-ratio: 16/9;
   width: 100%;
 }
@@ -39,8 +49,8 @@
   justify-content: center;
   padding: 4px;
   position: absolute;
-  right: 8px;
-  top: 8px;
+  /* right: 8px; */
+  top: 15px;
   transition: all .3s ease;
   width: 32px;
   z-index: 9999;
@@ -51,6 +61,5 @@
 }
 
 .cart-button~input:checked~.cart {
-  height: 100%;
   display: block;
 }

@@ -1,27 +1,27 @@
 import { useState, useId } from 'react'
 import './Filters.css'
-import { useFilters } from '@/app/core/hooks/useFilters'
+import { useFiltersStore } from "@/app/core/store";
+
 
 
 export function Filters() {
-  const {filters, setFilters} = useFilters()
+  const { filters, setFilters } = useFiltersStore()
 
   const minPriceFilterId = useId()
   const categoryFilterId = useId()
 
   const handleChangeMinPrice = (event: any) => {
-    setFilters(prevState => ({
-      ...prevState,
+    setFilters({
+      ...filters,
       minPrice: event.target.value
     })
-    )
   }
 
   const handleChangeCategory = (event: any) => {
-    setFilters(prevState => ({
-      ...prevState,
+    setFilters({
+      ...filters,
       category: event.target.value
-    }))
+    })
   }
 
   return (
