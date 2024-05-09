@@ -12,7 +12,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 export type FiltersState = {
   filters: {
-    category: string;
+    category: string[] | string;
     minPrice: number;
   };
   setFilters: (updater: (filters: { category: string; minPrice: number }) => { category: string; minPrice: number }) => void;

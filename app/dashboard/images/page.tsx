@@ -7,11 +7,15 @@ import { Button, ButtonGroup, useDisclosure } from "@nextui-org/react";
 import ImageModal from "@/app/core/ui/components/dashboardImages/ImageModal/ImageModal";
 import { Image } from "@/app/core/lib/definitions";
 import { Toaster } from "sonner";
+import {useFilters} from '@/app/core/hooks/useFilters'
+import { Filters } from "@/app/core/ui/components/shoppingcart/Filters";
 
 export default function Page() {
     const [images, setImages] = useState<Image[]>([])
     const [mode, setMode] = useState<"public" | "private">("public");
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+    const {filterImages} = useFilters()
+    const filteredImages = filterImages(images)
 
     const _getImages = async () => setImages(await getImages());
     useEffect(() => {
@@ -39,9 +43,10 @@ export default function Page() {
                     </Button>
                 }
             </ButtonGroup>
+            <Filters />
             <PhotoAlbum
                 layout="rows"
-                photos={images}
+                photos={filteredImages}
                 renderPhoto={(props) => (<NextImage mode={mode} onSucces={_getImages} {...props} />)}
                 sizes={{ size: "100vw" }}
             />
