@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from 'react'
 import Orders from '../../core/ui/history/orders'
-import SkeletonOrder from '../../core/ui/skeletons/skeletonOrder'
+import SkeletonOrder from '../../core/ui/skeletons'
 const page = () => {
   return (
     <div>

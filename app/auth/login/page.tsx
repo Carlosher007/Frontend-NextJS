@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/app/core/store";
 import Link from "next/link";
-import { Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
 import { useEffect } from "react";
 
 export default function Page() {

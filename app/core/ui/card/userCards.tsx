@@ -4,7 +4,7 @@ import {
   Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure,
   Card, CardHeader, CardBody, CardFooter, Image, Button, Input
 } from "@nextui-org/react";
-import { getCard, addCard, editCard, deleteCard } from '../../api/orders/api'
+import { getCard, addCard, editCard, deleteCard } from '../../api/api'
 import { useEffect, useState } from 'react'
 import UserCard from './userCard'
 
