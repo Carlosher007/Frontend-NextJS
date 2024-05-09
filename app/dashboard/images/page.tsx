@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PhotoAlbum from "react-photo-album";
 import NextImage from "@/app/core/ui/components/dashboardImages/NextImage/NextImage";
-import { getImages, getUserImages } from "../../core/api/dashboardImages/service";
+import { getImages, getUserImages, getUserPurchasedImages } from "../../core/api/dashboardImages/service";
 import { Button, ButtonGroup, useDisclosure } from "@nextui-org/react";
 import ImageModal from "@/app/core/ui/components/dashboardImages/ImageModal/ImageModal";
 import { Image } from "@/app/core/lib/definitions";
@@ -15,6 +15,7 @@ import { number } from "zod";
 export default function Page() {
     const [images, setImages] = useState<Image[]>([])
     const [mode, setMode] = useState<"public" | "private">("public");
+    const [purchasedImages, setPurchasedImages] = useState<boolean>(false)
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
     const {filterImages} = useFilters()
     const filteredImages = filterImages(images)
@@ -22,6 +23,10 @@ export default function Page() {
 
     const _getImages = async () => {
         if (mode == "public"){
+            if (purchasedImages){
+                setImages(await getUserPurchasedImages(userId))
+                return;
+            }
             setImages(await getImages())
             return;
         }
@@ -29,15 +34,20 @@ export default function Page() {
     };
     useEffect(() => {
         _getImages();
-    }, [mode])
+    }, [mode, purchasedImages])
 
     return (
         <div className="flex flex-col gap-4">
             <ButtonGroup>
                 <Button
-                    color={mode === "public" ? "success" : "default"}
-                    onClick={() => setMode("public")}>
+                    color={mode === "public" && !purchasedImages ? "success" : "default"}
+                    onClick={() => {setMode("public"), setPurchasedImages(false)}}>
                     Explore
+                </Button>
+                <Button
+                    color={purchasedImages && mode === "public" ? "success" : "warning"}
+                    onClick={() => {setMode("public"); setPurchasedImages(true)}}>
+                    My Purchased Images
                 </Button>
                 <Button
                     color={mode === "private" ? "success" : "default"}

@@ -16,6 +16,14 @@ export const getUserImages: (userId: number | string) => Promise<Image[]> = asyn
     return images;
 }
 
+export const getUserPurchasedImages: (userId: number | string) => Promise<Image[]> = async (userId: number | string) => {
+    const response = await fetch(`${BASE_URL}/Image/get-user-purchased-images?`
+        + new URLSearchParams({foo: "userId", value:`${userId}`})
+    );
+    const images: Image[] = await response.json();
+    return images;
+}
+
 export const getCategories: () => Promise<Category[]> = async () => {
     const response = await fetch(`${BASE_URL}/Category/get-categories`);
     const categories: Category[] = await response.json();
