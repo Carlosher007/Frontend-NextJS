@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -24,6 +26,7 @@ import {
   SearchIcon,
   Logo
 } from "@/app/core/ui/icons";
+import { Cart } from "../shoppingcart/Cart";
 
 
 export const Navbar = () => {
@@ -44,7 +47,7 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky"  className="bg-white dark:bg-darkBackground">
+    <NextUINavbar maxWidth="xl" position="sticky" className="bg-white dark:bg-darkBackground">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -68,10 +71,13 @@ export const Navbar = () => {
             </NavbarItem>
           ))}
         </ul>
+        <NavbarBrand className="lg:hidden flex ">
+          <NavbarMenuToggle />
+        </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
+        className="hidden sm:flex basis-1/5 sm:basis-full items-center mr-3"
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
@@ -93,6 +99,9 @@ export const Navbar = () => {
             Univalle
           </Button>
         </NavbarItem>
+        <NavbarItem >
+          <Cart />
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -100,7 +109,11 @@ export const Navbar = () => {
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
-        <NavbarMenuToggle />
+        {/* <NavbarMenuToggle /> */}
+      </NavbarContent>
+
+      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <Cart />
       </NavbarContent>
 
       <NavbarMenu className="bg-white dark:bg-darkBackground">

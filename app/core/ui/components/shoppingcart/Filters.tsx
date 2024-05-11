@@ -1,35 +1,28 @@
-'use client'
-import { useState, useId, useEffect } from 'react'
+import { useState, useId } from 'react'
 import './Filters.css'
-import { useFilters } from '@/app/core/hooks/useFilters'
-import { Category } from '@/app/core/lib/definitions'
-import { getCategories } from '@/app/core/api/dashboardImages/service'
+import { useFiltersStore } from "@/app/core/store";
+
 
 
 export function Filters() {
-  const {filters, setFilters} = useFilters()
-  const [categories, setCategories] = useState<Category[]>([])
+  const { filters, setFilters } = useFiltersStore()
 
   const minPriceFilterId = useId()
   const categoryFilterId = useId()
 
   const handleChangeMinPrice = (event: any) => {
-    setFilters(prevState => ({
-      ...prevState,
+    setFilters({
+      ...filters,
       minPrice: event.target.value
     })
-    )
   }
 
   const handleChangeCategory = (event: any) => {
-    setFilters(prevState => ({
-      ...prevState,
+    setFilters({
+      ...filters,
       category: event.target.value
-    }))
+    })
   }
-
-  const _setCategories = async () => setCategories(await getCategories());
-  useEffect(() => { _setCategories() }, []); 
 
   return (
     <section className="filters">
@@ -50,8 +43,9 @@ export function Filters() {
         <label htmlFor={categoryFilterId}>Category</label>
         <select id={categoryFilterId} onChange={handleChangeCategory} >
           <option value="all">All</option>
-          {categories.map(category => 
-            <option key={category.category_id} value={category.name}>{category.name}</option>)}
+          <option value="pets">Pets</option>
+          <option value="technology">Technology</option>
+          <option value="horses">Horses</option>
         </select>
       </div>
     </section>

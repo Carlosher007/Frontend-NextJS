@@ -8,16 +8,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-// SHOPPING-CART
-
-export type FiltersState = {
-  filters: {
-    category: string[] | string;
-    minPrice: number;
-  };
-  setFilters: (updater: (filters: { category: string; minPrice: number }) => { category: string; minPrice: number }) => void;
-};
-
 // GENERAL
 
 export type User = {
