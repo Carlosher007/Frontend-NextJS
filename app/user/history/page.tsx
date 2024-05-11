@@ -6,7 +6,6 @@ import SkeletonOrder from '../../core/ui/skeletons'
 const page = () => {
   return (
     <div>
-      <h1 className='text-2xl mx-8 mb-8'>Historial</h1>
       <Suspense fallback={<SkeletonOrder />}>
         <Orders />
       </Suspense>

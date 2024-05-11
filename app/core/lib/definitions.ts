@@ -8,7 +8,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-
 // GENERAL
 
 export type User = {
@@ -21,18 +20,22 @@ export type User = {
 
 export type Image = {
   imageId: number;
-  category: string;
   creator?: number;
   src: string;
   name: string;
   description?: string;
   format: string;
-  price: number;
+  price?: number;
   isFree: boolean;
-  isDefault?: boolean;
-  width?: number;
-  height?: number;
+  isDefault: boolean;
+  width: number;
+  height: number;
+  imagecategories: ImageCategory[];
 };
+
+export type ImageCategory = {
+  category: Category
+}
 
 export type Category = {
   category_id: number;

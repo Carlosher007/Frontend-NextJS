@@ -11,7 +11,7 @@ export function useFilters() {
         image.price >= filters.minPrice &&
         (
           filters.category === 'all' ||
-          image.category === filters.category
+          (image.imagecategories.find(_ctg => (filters.category as string[]).includes(_ctg.category.name))&&true)
         )
       )
     })
