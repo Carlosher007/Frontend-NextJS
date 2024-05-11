@@ -20,7 +20,7 @@ export type User = {
 };
 
 export type Image = {
-  imageId: string;
+  imageId: number;
   category: string;
   creator?: number;
   src: string;

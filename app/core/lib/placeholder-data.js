@@ -10,7 +10,7 @@ const users = [
 
 const images = [
   {
-    imageId: "1",
+    imageId: 1,
     category: 'pets',
     creator: 1,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -21,7 +21,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "2",
+    imageId: 2,
     category: 'pets',
     creator: 2,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -32,7 +32,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "3",
+    imageId: 3,
     category: 'pets',
     creator: 3,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -43,7 +43,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "4",
+    imageId: 4,
     category: 'pets',
     creator: 4,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -54,7 +54,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "5",
+    imageId: 5,
     category: 'pets',
     creator: 5,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -65,7 +65,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "6",
+    imageId: 6,
     category: 'pets',
     creator: 6,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -76,7 +76,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "7",
+    imageId: 7,
     category: 'horses',
     creator: 7,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",
@@ -87,7 +87,7 @@ const images = [
     isFree: false
   },
   {
-    imageId: "8",
+    imageId: 8,
     category: 'technology',
     creator: 8,
     src: "https://www.fcbarcelona.com/fcbarcelona/photo/2022/08/02/ae5252d1-b79b-4950-9e34-6e67fac09bb0/LeoMessi20092010_pic_fcb-arsenal62.jpg",

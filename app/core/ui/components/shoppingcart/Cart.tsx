@@ -45,7 +45,7 @@ export function Cart() {
           {cart.map(image => (
             <CartItem
               key={image.imageId}
-              removeFromCart={() => removeFromCart(image.imageId)}
+              removeFromCart={() => removeFromCart((image.imageId))}
               width={image.width || 1080}
               height={image.height || 720}
               {...image}
