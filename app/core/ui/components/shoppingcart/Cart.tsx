@@ -35,13 +35,13 @@ export function Cart() {
 
   return (
     <>
-      <label className='cart-button' htmlFor={cartCheckboxId}>
+      <label className='cart-button bg-default-200' htmlFor={cartCheckboxId}>
         <CartIcon />
       </label>
       <input id={cartCheckboxId} type='checkbox' hidden />
 
       <aside className='cart'>
-        <ul className='mt-10'>
+        <ul className='flex flex-col gap-5 mt-9 '>
           {cart.map(image => (
             <CartItem
               key={image.imageId}
@@ -64,7 +64,7 @@ export function Cart() {
             )
             :
             (
-              <div className='text-center flex items-center mt-3 text-lg flex-grow mt-16'>
+              <div className='text-center flex items-center text-lg flex-grow mt-16'>
                 There are no items in the cart
               </div>
             )

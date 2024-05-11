@@ -71,6 +71,9 @@ export const Navbar = () => {
             </NavbarItem>
           ))}
         </ul>
+        <NavbarBrand className="lg:hidden flex ">
+          <NavbarMenuToggle />
+        </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent
@@ -106,11 +109,10 @@ export const Navbar = () => {
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
-        <NavbarMenuToggle />
+        {/* <NavbarMenuToggle /> */}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-
         <Cart />
       </NavbarContent>
 
