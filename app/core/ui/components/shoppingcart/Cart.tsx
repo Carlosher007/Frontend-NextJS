@@ -41,17 +41,17 @@ export function Cart() {
       <input id={cartCheckboxId} type='checkbox' hidden />
 
       <aside className='cart'>
-        <ul className='flex flex-col gap-5 mt-9 '>
+        {/* <ul className='flex flex-col gap-5 mt-9 '>
           {cart.map(image => (
             <CartItem
               key={image.imageId}
               removeFromCart={() => removeFromCart((image.imageId))}
-              width={image.width || 1080}
-              height={image.height || 720}
+              // width={image.width || 1080}
+              // height={image.height || 720}
               {...image}
             />
           ))}
-        </ul>
+        </ul> */}
 
         {
           cart.length > 0 ?

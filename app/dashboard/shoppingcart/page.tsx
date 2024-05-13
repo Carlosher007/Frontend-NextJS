@@ -12,13 +12,13 @@ export default function Page() {
   const [images] = useState(initialImages)
   const {filterImages} = useFilters()
 
-  const filteredImages = filterImages(images)
+  // const filteredImages = filterImages(images)
 
   return (
     <>
       <Header/>
       {/* <Cart /> */}
-      <Images images={filteredImages} />
+      {/* <Images images={filteredImages} /> */}
     </>
   )
 }
