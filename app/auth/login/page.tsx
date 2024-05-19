@@ -3,12 +3,20 @@
 import { useUserStore } from "@/app/core/store";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const addUser = useUserStore(state => state.addUser);
   const removeUser = useUserStore(state => state.removeUser);
   const id = useUserStore(state => state.id);
+
+  const [idS, setIdS] = useState("")
+
+  useEffect(() => {
+    console.log("id del user storage"+id)
+    console.log(id)
+    setIdS(id)
+  },[id])
 
   const customUser = {
     id: '1',

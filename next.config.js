@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.fcbarcelona.com',
+        hostname: 'imagehub',
         port: '',
         pathname: '/**'
       },

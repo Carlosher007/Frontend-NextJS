@@ -4,18 +4,19 @@ import { useId } from 'react'
 import { CartIcon, ClearCartIcon } from '@/app/core/ui/icons'
 import { useCartStore } from '@/app/core/store/images/cart-store'
 import Image from 'next/image'
+import { Image as ImageDefinition} from "@/app/core/lib/definitions";
 
-function CartItem({ src, price, name, height, width, removeFromCart }: { src: string, price: number, name: string, height: number, width: number, removeFromCart: () => void }) {
+function CartItem({ image, removeFromCart }: { image: ImageDefinition, removeFromCart: () => void }) {
   return (
     <li>
       <Image
-        src={src}
-        alt={name}
-        width={width}
-        height={height}
+        src={`https:${image.src}`}
+        alt={image.name}
+        width={image.width}
+        height={image.height}
       />
       <div className='flex justify-center mt-2'>
-        <strong>{name}</strong> - ${price}
+        <strong>{image.name}</strong> - ${image.price}
       </div>
 
       <footer className='mt-1'>
@@ -41,17 +42,15 @@ export function Cart() {
       <input id={cartCheckboxId} type='checkbox' hidden />
 
       <aside className='cart'>
-        {/* <ul className='flex flex-col gap-5 mt-9 '>
+        <ul className='flex flex-col gap-5 mt-9 '>
           {cart.map(image => (
             <CartItem
               key={image.imageId}
               removeFromCart={() => removeFromCart((image.imageId))}
-              // width={image.width || 1080}
-              // height={image.height || 720}
-              {...image}
+              image={image}
             />
           ))}
-        </ul> */}
+        </ul>
 
         {
           cart.length > 0 ?

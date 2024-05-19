@@ -18,7 +18,7 @@ export const useUserStore = create<User & Actions>()(
 
       removeUser: () => set({ id: '', username: '', email: '' }),
     }),
-    { name: 'user-storage', skipHydration: true },
+    { name: 'user-storage'},
   ),
 );
 

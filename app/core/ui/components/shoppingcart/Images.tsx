@@ -7,9 +7,9 @@ import { useCartStore } from '@/app/core/store/images/cart-store'
 export function Images({ images }: { images: ImageDefinition[] }) {
   const { addToCart, cart, removeFromCart } = useCartStore(state => ({ addToCart: state.addToCart, cart: state.cart, removeFromCart: state.removeFromCart }))
 
-  const checkProductInCart = (image: ImageDefinition) => {
+  onst checkProductInCart = (image: ImageDefinition) => {
     return cart.some(item => item.imageId === image.imageId)
-  }
+  }c
 
   return (
     <main className="images">

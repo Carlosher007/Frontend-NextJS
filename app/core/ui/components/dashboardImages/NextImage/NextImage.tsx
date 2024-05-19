@@ -1,3 +1,4 @@
+"use client"
 import { CldImage } from "next-cloudinary";
 import { Button, useDisclosure } from "@nextui-org/react";
 import { NextImageProps } from "./NextImage.props";
@@ -6,6 +7,11 @@ import ImageModal from "../ImageModal/ImageModal";
 import ConfirmModal from "@/app/core/ui/components/dashboardImages/ConfirmModal";
 import { deleteImage } from "@/app/core/api/dashboardImages/service";
 import { toast } from "sonner";
+import { useCartStore } from '@/app/core/store/images/cart-store'
+import clsx from 'clsx';
+import { Image as ImageDefinition } from "@/app/core/lib/definitions";
+import { AddToCartIcon, RemoveFromCartIcon } from '@/app/core/ui/icons'
+import { useEffect, useState } from 'react'
 
 export default function NextImage({
   photo,
@@ -14,6 +20,19 @@ export default function NextImage({
   mode = "public",
   onSucces
 }: NextImageProps | any) {
+
+  const { addToCart, cart, removeFromCart } = useCartStore(state => ({ addToCart: state.addToCart, cart: state.cart, removeFromCart: state.removeFromCart }))
+
+  const checkProductInCart = (id: number) => {
+    return cart.some(item => item.imageId === id)
+  }
+
+  const [isProductInCart, setIsProductInCart] = useState(checkProductInCart(photo.imageId))
+
+  useEffect(() => {
+    setIsProductInCart(checkProductInCart(photo.imageId))
+  }, [cart])
+
 
   const {
     isOpen: isOpenImageModal,
@@ -34,7 +53,11 @@ export default function NextImage({
   }
 
   const onAddToCart = () => {
-    console.log(photo)
+    if (isProductInCart) {
+      removeFromCart(photo.imageId)
+      return;
+    }
+    addToCart(photo)
   }
 
   const onConfirmDeleteModal = async () => {
@@ -83,19 +106,27 @@ export default function NextImage({
       }
       {mode === "public" &&
         <>
-        <div className="flex flex-col">
+          <div className="flex flex-col">
             <Button
               isIconOnly
               color="danger"
-              className="m-1"
-              onPress={onAddToCart}>
-              Cart
+              className={clsx("m-1", {
+                'bg-red-500': isProductInCart,
+                'bg-green-500': !isProductInCart
+              })}
+              onPress={onAddToCart}
+            >
+              {
+                isProductInCart
+                  ? <RemoveFromCartIcon />
+                  : <AddToCartIcon />
+              }
             </Button>
           </div>
           <ImageModal isOpen={isOpenImageModal} onOpenChange={onOpenChangeEditModal} onClose={onCloseImageModal} mode="view" image={photo} onSucces={onSucces} />
         </>
       }
-      
+
     </div>
   );
 }

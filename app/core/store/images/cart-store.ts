@@ -1,5 +1,6 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { Image } from "@/app/core/lib/definitions";
+import { persist } from 'zustand/middleware';
 
 type CartState = {
   cart: Image[];
@@ -10,16 +11,20 @@ type CartState = {
   clearCart: () => void;
 };
 
-export const useCartStore = create<CartState>((set) => ({
-  cart: [],
-  idUser: null,
+export const useCartStore = create<CartState>()(
+  persist(
+    (set) => ({
+      cart: [],
+      idUser: null,
 
-  setIdUser: (id) => set(() => ({ idUser: id })),
+      setIdUser: (id) => set(() => ({ idUser: id })),
 
-  addToCart: (image) => set((state) => ({ cart: [...state.cart, image] })),
+      addToCart: (image) => set((state) => ({ cart: [...state.cart, image] })),
 
-  removeFromCart: (id) => set((state) => ({ cart: state.cart.filter((img) => img.imageId !== id) })),
+      removeFromCart: (id) => set((state) => ({ cart: state.cart.filter((img) => img.imageId !== id) })),
 
-  clearCart: () => set(() => ({ cart: [] })),
-
-}));
+      clearCart: () => set(() => ({ cart: [] })),
+    }),
+    { name: 'cart-storage' },
+  ),
+);

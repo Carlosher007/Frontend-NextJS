@@ -1,4 +1,4 @@
-import create from 'zustand';
+import {create} from 'zustand';
 // import { FiltersState } from '@/app/core/lib/definitions';
 
 type FiltersState = {
