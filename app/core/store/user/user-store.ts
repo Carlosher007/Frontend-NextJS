@@ -1,25 +1,32 @@
 import { create } from 'zustand';
 import { User } from '@/app/core/lib/definitions';
-import { persist } from 'zustand/middleware';
+import { persist, devtools } from 'zustand/middleware';
 
-export type Actions = {
-  addUser: (user: User) => void;
+
+type UserState = {
+  idUser: number | null;
+  isLogged: boolean;
+  loading: boolean;
+  addUser: (idUser: number) => void;
   removeUser: () => void;
+  setLoading: (loading: boolean) => void;
 };
 
-export const useUserStore = create<User & Actions>()(
+export const useUserStore = create<UserState>()(devtools(
   persist(
     (set) => ({
-      id: '',
-      username: '',
-      email: '',
+      idUser: null,
+      isLogged: false,
+      loading: true,
 
-      addUser: (user) => set(user),
+      addUser: (idUser) => set(() => ({ idUser: idUser, isLogged: true })),
 
-      removeUser: () => set({ id: '', username: '', email: '' }),
+      removeUser: () => set(() => ({ idUser: null, isLogged: false })),
+
+      setLoading: (loading) => set(() => ({ loading })),
     }),
-    { name: 'user-storage'},
-  ),
+    { name: 'user-storage' },
+  )),
 );
 
 /*

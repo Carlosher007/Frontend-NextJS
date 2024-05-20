@@ -5,13 +5,17 @@ import { CartIcon, ClearCartIcon } from '@/app/core/ui/icons'
 import { useCartStore } from '@/app/core/store/images/cart-store'
 import Image from 'next/image'
 import { Image as ImageDefinition} from "@/app/core/lib/definitions";
+import { CldImage } from "next-cloudinary";
 
 function CartItem({ image, removeFromCart }: { image: ImageDefinition, removeFromCart: () => void }) {
+
   return (
     <li>
-      <Image
-        src={`https:${image.src}`}
+      <CldImage
+        src={image.src}
+        loading="lazy"
         alt={image.name}
+        className='cart-image'
         width={image.width}
         height={image.height}
       />

@@ -10,22 +10,14 @@ export default function Page() {
   const removeUser = useUserStore(state => state.removeUser);
   const id = useUserStore(state => state.id);
 
-  const [idS, setIdS] = useState("")
-
-  useEffect(() => {
-    console.log("id del user storage"+id)
-    console.log(id)
-    setIdS(id)
-  },[id])
-
   const customUser = {
-    id: '1',
+    id: 1,
     username: 'johndoe',
     email: 'john22@gmail.com'
   };
 
   const handleAddUser = () => {
-    addUser(customUser);
+    addUser(customUser.id);
   }
 
   const handleRemoveUser = () => {

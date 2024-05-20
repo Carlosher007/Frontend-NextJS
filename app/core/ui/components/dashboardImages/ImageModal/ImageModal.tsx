@@ -18,7 +18,6 @@ export default function ImageModal({ isOpen, onOpenChange, mode, image, onSucces
     const [isProductInCart, setIsProductInCart] = useState(false)
 
     useEffect(() => {
-        console.log("Cambio imagen")
         if (image) {
             setIsProductInCart(checkProductInCart(image.imageId))
         }
