@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const addUser = useUserStore(state => state.addUser);
   const removeUser = useUserStore(state => state.removeUser);
-  const id = useUserStore(state => state.id);
+  const id = useUserStore(state => state.idUser);
 
   const customUser = {
     id: 1,

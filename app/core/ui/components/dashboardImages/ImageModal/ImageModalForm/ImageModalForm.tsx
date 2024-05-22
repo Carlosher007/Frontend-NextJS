@@ -22,11 +22,11 @@ type ImageForm = {
 export default function ImageModalForm({ image, mode, onSucces, ...props }: ImageModalFormProps) {
     const viewMode = mode === "view";
     const [categories, setCategories] = useState<Category[]>([])
-    const [_selectedCategories, _setSelectedCategories] = useState<Set<number> | any>(image ? new Set(image.imagecategories.map(ic => ic.category.categoryId)) : new Set())
+    const [_selectedCategories, _setSelectedCategories] = useState<Set<number> | any>(image ? new Set(image.imagecategories.map(ic => ic.category.category_id)) : new Set())
 
     const { register, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm<ImageForm>()
     const watchSelectedImg = watch("image", undefined)
-    const userId = useUserStore(state => state.id);
+    const userId = useUserStore(state => state.idUser);
 
     const handleSelectionChange = (e:any) => {
         const newSelectedCategories = new Set(e.target.value.split(","));
@@ -58,7 +58,7 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
             setValue("name", image.name)
             setValue("description", image.description)
             setValue("price", image.price)
-            setValue("categories", image.imagecategories.map(ic => ic.category.categoryId).join(","))
+            setValue("categories", image.imagecategories.map(ic => ic.category.category_id).join(","))
         }
     }, [image])
 
@@ -134,8 +134,8 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
                 >
                 {categories.map(category =>
                     <SelectItem
-                        value={category.categoryId}
-                        key={category.categoryId}>
+                        value={category.category_id}
+                        key={category.category_id}>
                         {category.name}
                     </SelectItem>
                 )}

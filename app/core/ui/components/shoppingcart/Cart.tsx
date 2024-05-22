@@ -1,10 +1,10 @@
 import './Cart.css'
 
-import { useId } from 'react'
+import { useEffect, useId } from 'react'
 import { CartIcon, ClearCartIcon } from '@/app/core/ui/icons'
 import { useCartStore } from '@/app/core/store/images/cart-store'
 import Image from 'next/image'
-import { Image as ImageDefinition} from "@/app/core/lib/definitions";
+import { Image as ImageDefinition } from "@/app/core/lib/definitions";
 import { CldImage } from "next-cloudinary";
 
 function CartItem({ image, removeFromCart }: { image: ImageDefinition, removeFromCart: () => void }) {
@@ -32,11 +32,19 @@ function CartItem({ image, removeFromCart }: { image: ImageDefinition, removeFro
 
 export function Cart() {
   const cartCheckboxId = useId()
-  const { cart, clearCart, removeFromCart } = useCartStore(state => ({
+  const { cart, clearCart, removeFromCart, getCart } = useCartStore(state => ({
     cart: state.cart,
     clearCart: state.clearCart,
     removeFromCart: state.removeFromCart,
+    getCart: state.getCart
   }))
+
+  useEffect(() => {
+    const getCartApi = async () => {
+      getCart();
+    }
+    getCartApi()
+  }, [])
 
   return (
     <>

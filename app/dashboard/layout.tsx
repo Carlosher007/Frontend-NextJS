@@ -12,21 +12,18 @@ export default function Layout({
 }) {
   const [idUser, isLogged, loading, setLoading] = useUserStore((state) => [state.idUser, state.isLogged, state.loading, state.setLoading]);
 
-  const [setIdUser, removeIdUser] = useCartStore((state) => [state.setIdUser, state.removeIdUser]);
+  const { getCart } = useCartStore();
 
-  useEffect(() => {
-    if (idUser !== null) {
-      setIdUser(idUser);
-    } else {
-      removeIdUser();
-    }
-  }, [idUser]);
 
   useEffect(() => {
     // Establece el estado de carga a true al inicio de la carga de datos
     setLoading(true);
 
     // Carga los datos del usuario aquí...
+    // const getCartApi = async () => {
+    //   getCart();
+    // }
+    // getCartApi()
 
     // Establece el estado de carga a false al final de la carga de datos
     setLoading(false);

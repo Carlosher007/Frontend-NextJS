@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import PhotoAlbum from "react-photo-album";
 import NextImage from "@/app/core/ui/components/dashboardImages/NextImage/NextImage";
 import { getImages, getUserImages, getUserPurchasedImages } from "../../core/api/dashboardImages/service";
-import { Button, ButtonGroup} from "@nextui-org/button";
-import {useDisclosure } from "@nextui-org/use-disclosure";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import { useDisclosure } from "@nextui-org/use-disclosure";
 import ImageModal from "@/app/core/ui/components/dashboardImages/ImageModal/ImageModal";
 import { Image } from "@/app/core/lib/definitions";
 import { Toaster } from "sonner";
-import {useFilters} from '@/app/core/hooks/useFilters'
+import { useFilters } from '@/app/core/hooks/useFilters'
 import { Filters } from "@/app/core/ui/components/shoppingcart/Filters";
 import { useUserStore } from "@/app/core/store";
 import { number } from "zod";
@@ -18,20 +18,26 @@ export default function Page() {
     const [mode, setMode] = useState<"public" | "private">("public");
     const [purchasedImages, setPurchasedImages] = useState<boolean>(false)
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-    const {filterImages} = useFilters()
+    const { filterImages } = useFilters()
     const filteredImages = filterImages(images)
-    const userId = useUserStore(state => state.id);
+    const userId = useUserStore(state => state.idUser);
+
+    
 
     const _getImages = async () => {
-        if (mode == "public"){
-            if (purchasedImages){
-                setImages(await getUserPurchasedImages(userId))
-                return;
+        if (mode == "public") {
+            if (purchasedImages) {
+                if (userId) {
+                    setImages(await getUserPurchasedImages(userId))
+                    return;
+                }
             }
             setImages(await getImages())
             return;
         }
-        setImages(await getUserImages(userId))
+        if(userId){
+            setImages(await getUserImages(userId))
+        }
     };
     useEffect(() => {
         _getImages();
@@ -42,12 +48,12 @@ export default function Page() {
             <ButtonGroup>
                 <Button
                     color={mode === "public" && !purchasedImages ? "success" : "default"}
-                    onClick={() => {setMode("public"), setPurchasedImages(false)}}>
+                    onClick={() => { setMode("public"), setPurchasedImages(false) }}>
                     Explore
                 </Button>
                 <Button
                     color={purchasedImages && mode === "public" ? "success" : "warning"}
-                    onClick={() => {setMode("public"); setPurchasedImages(true)}}>
+                    onClick={() => { setMode("public"); setPurchasedImages(true) }}>
                     My Purchased Images
                 </Button>
                 <Button
