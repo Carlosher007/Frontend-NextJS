@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import { Image as ImageDefinition } from "@/app/core/lib/definitions";
 import { AddToCartIcon, RemoveFromCartIcon } from '@/app/core/ui/icons'
 import { useEffect, useState } from 'react'
+import { useUserStore } from "@/app/core/store";
 
 export default function NextImage({
   photo,
@@ -22,6 +23,9 @@ export default function NextImage({
 }: NextImageProps | any) {
 
   const { addToCart, cart, removeFromCart } = useCartStore(state => ({ addToCart: state.addToCart, cart: state.cart, removeFromCart: state.removeFromCart }))
+
+  const userId = useUserStore(state => state.idUser);
+
 
   const checkProductInCart = (id: number) => {
     return cart.some(item => item.imageId === id)
@@ -53,11 +57,12 @@ export default function NextImage({
   }
 
   const onAddToCart = () => {
+    if (!userId) return;
     if (isProductInCart) {
-      removeFromCart(photo.imageId)
+      removeFromCart(photo.imageId, userId)
       return;
     }
-    addToCart(photo)
+    addToCart(photo, userId)
   }
 
   const onConfirmDeleteModal = async () => {

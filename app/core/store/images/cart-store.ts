@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { Image } from "@/app/core/lib/definitions";
 import { persist, devtools } from 'zustand/middleware';
-import { assignImageFromCart, getCarts as getCartsApi } from '../../api/shoppingcart/service';
+import { assignImageFromCart, deleteCart, deleteImageFromCart } from '@/app/core/api/shoppingcart/service';
 import { useUserStore } from "@/app/core/store";
 
 
 type CartState = {
   cart: Image[];
   addToCart: (image: Image, userId: number) => Promise<void>;
-  removeFromCart: (id: number) => void;
-  clearCart: () => void;
+  removeFromCart: (id: number, userId: number) => void;
+  clearCart: (userId: number) => void;
   setCart: (cart: Image[]) => void;
 };
 
@@ -25,18 +25,26 @@ export const useCartStore = create<CartState>()(
           if (userId) {
             const response = await assignImageFromCart(userId, image.imageId);
             console.log(response)
-            if (response && response.message) {
-              console.log("Error: ", response.message);
-              return;
-            }
+            if (!response) return;
             set((state) => ({ cart: [...state.cart, image] }))
           }
         },
 
+        removeFromCart: async (id, userId) => {
+          if (userId) {
+            const response = await deleteImageFromCart(userId, id);
+            if (!response) return;
+            set((state) => ({ cart: state.cart.filter((img) => img.imageId !== id) }))
+          }
+        },
 
-        removeFromCart: (id) => set((state) => ({ cart: state.cart.filter((img) => img.imageId !== id) })),
-
-        clearCart: () => set(() => ({ cart: [] })),
+        clearCart: async (userId) => {
+          if (userId) {
+            const response = await deleteCart(userId);
+            if (!response) return;
+            set((state) => ({ cart: [] }))
+          }
+        },
 
         setCart: (cart) => set(() => ({ cart })),
 

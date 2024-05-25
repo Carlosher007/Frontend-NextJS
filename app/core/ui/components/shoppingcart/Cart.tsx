@@ -48,6 +48,7 @@ export function Cart() {
     const getCartApi = async () => {
       if (idUser) {
         const response = await getCartAPI(idUser);
+        if (!response) return;
         const { cartImages } = response
         // const response2 = await getImageById(cartImages[0].imageId)
         const imagePromises = cartImages.map(async (item: ImageDefinition) => {
@@ -76,7 +77,11 @@ export function Cart() {
           {cart.map(image => (
             <CartItem
               key={image.imageId}
-              removeFromCart={() => removeFromCart((image.imageId))}
+              removeFromCart={() => {
+                if (idUser) {
+                  removeFromCart(image.imageId, idUser)
+                }
+              }}
               image={image}
             />
           ))}
@@ -86,7 +91,11 @@ export function Cart() {
           cart.length > 0 ?
             (
               <div className='flex justify-center mt-3'>
-                <button className='bg-neutral-800' onClick={clearCart}>
+                <button className='bg-neutral-800' onClick={() => {
+                  if (idUser) {
+                    clearCart(idUser)
+                  }
+                }}>
                   <ClearCartIcon />
                 </button>
               </div>
