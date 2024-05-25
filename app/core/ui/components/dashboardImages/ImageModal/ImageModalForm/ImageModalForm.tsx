@@ -22,27 +22,27 @@ type ImageForm = {
 export default function ImageModalForm({ image, mode, onSucces, ...props }: ImageModalFormProps) {
     const viewMode = mode === "view";
     const [categories, setCategories] = useState<Category[]>([])
-    const [_selectedCategories, _setSelectedCategories] = useState<Set<number> | any>(image ? new Set(image.imagecategories.map(ic => ic.category.category_id)) : new Set())
+    const [_selectedCategories, _setSelectedCategories] = useState<Set<number> | any>(image ? new Set(image.imagecategories.map(ic => ic.category.categoryId)) : new Set())
 
     const { register, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm<ImageForm>()
     const watchSelectedImg = watch("image", undefined)
     const userId = useUserStore(state => state.idUser);
 
-    const handleSelectionChange = (e:any) => {
+    const handleSelectionChange = (e: any) => {
         const newSelectedCategories = new Set(e.target.value.split(","));
         _setSelectedCategories(newSelectedCategories);
-        setValue("categories", e.target.value.split(",").filter((str:string) => str !== "").join(","))
-      };
+        setValue("categories", e.target.value.split(",").filter((str: string) => str !== "").join(","))
+    };
 
     const onSubmit: SubmitHandler<ImageForm> = async (data) => {
         try {
             let res = null;
-            if (image){
+            if (image) {
                 console.log(data)
                 res = await updateImage(data, image.imageId);
             }
-            else{
-                res = await uploadImage({...data, creator:Number(userId)});
+            else {
+                res = await uploadImage({ ...data, creator: Number(userId) });
             }
             const resTxt: string = await res.text();
             if (res.status !== 200) throw new Error(resTxt)
@@ -54,11 +54,11 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
     }
 
     useEffect(() => {
-        if (image){
+        if (image) {
             setValue("name", image.name)
             setValue("description", image.description)
             setValue("price", image.price)
-            setValue("categories", image.imagecategories.map(ic => ic.category.category_id).join(","))
+            setValue("categories", image.imagecategories.map(ic => ic.category.categoryId).join(","))
         }
     }, [image])
 
@@ -131,11 +131,11 @@ export default function ImageModalForm({ image, mode, onSucces, ...props }: Imag
                 {...register("categories", { required: false })}
                 onChange={handleSelectionChange}
                 isDisabled={viewMode}
-                >
+            >
                 {categories.map(category =>
                     <SelectItem
-                        value={category.category_id}
-                        key={category.category_id}>
+                        value={category.categoryId}
+                        key={category.categoryId}>
                         {category.name}
                     </SelectItem>
                 )}

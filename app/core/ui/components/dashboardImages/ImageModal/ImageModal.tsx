@@ -3,13 +3,16 @@ import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader
 import React from 'react'
 import { ImageModalProps } from './ImageModal.props'
 import ImageModalForm from './ImageModalForm/ImageModalForm'
-import { useCartStore } from '@/app/core/store/images/cart-store'
+import { useCartStore , useUserStore} from '@/app/core/store'
 import clsx from 'clsx';
 import { useEffect, useState } from 'react'
 
 export default function ImageModal({ isOpen, onOpenChange, mode, image, onSucces, ...props }: ImageModalProps) {
 
     const { addToCart, cart, removeFromCart } = useCartStore(state => ({ addToCart: state.addToCart, cart: state.cart, removeFromCart: state.removeFromCart }))
+
+    const userId = useUserStore(state => state.idUser);
+
 
     const checkProductInCart = (id: number) => {
         return cart.some(item => item.imageId === id)
@@ -28,7 +31,8 @@ export default function ImageModal({ isOpen, onOpenChange, mode, image, onSucces
             removeFromCart(image.imageId)
             return;
         }
-        addToCart(image)
+        if (!userId) return;
+        addToCart(image,userId)
     }
 
     return (

@@ -1,11 +1,13 @@
 import './Cart.css'
 
-import { useEffect, useId } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { CartIcon, ClearCartIcon } from '@/app/core/ui/icons'
-import { useCartStore } from '@/app/core/store/images/cart-store'
+import { useCartStore, useUserStore } from '@/app/core/store/'
 import Image from 'next/image'
 import { Image as ImageDefinition } from "@/app/core/lib/definitions";
 import { CldImage } from "next-cloudinary";
+import { getCart as getCartAPI } from '@/app/core/api/shoppingcart/service'
+import { getImageById } from '@/app/core/api/dashboardImages/service'
 
 function CartItem({ image, removeFromCart }: { image: ImageDefinition, removeFromCart: () => void }) {
 
@@ -32,19 +34,35 @@ function CartItem({ image, removeFromCart }: { image: ImageDefinition, removeFro
 
 export function Cart() {
   const cartCheckboxId = useId()
-  const { cart, clearCart, removeFromCart, getCart } = useCartStore(state => ({
+  const { cart, clearCart, removeFromCart, setCart } = useCartStore(state => ({
     cart: state.cart,
     clearCart: state.clearCart,
     removeFromCart: state.removeFromCart,
-    getCart: state.getCart
+    setCart: state.setCart
   }))
+
+  const [idUser, loading, setLoading] = useUserStore((state) => [state.idUser, state.loading, state.setLoading]);
+
 
   useEffect(() => {
     const getCartApi = async () => {
-      getCart();
+      if (idUser) {
+        const response = await getCartAPI(idUser);
+        const { cartImages } = response
+        // const response2 = await getImageById(cartImages[0].imageId)
+        const imagePromises = cartImages.map(async (item: ImageDefinition) => {
+          const response2 = await getImageById(item.imageId)
+          return response2
+        });
+
+        const images = await Promise.all(imagePromises)
+        console.log(images)
+        setCart(images)
+      }
     }
     getCartApi()
-  }, [])
+
+  }, [idUser])
 
   return (
     <>

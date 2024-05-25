@@ -16,6 +16,13 @@ export const getUserImages: (userId: number | string) => Promise<Image[]> = asyn
     return images;
 }
 
+export const getImageById: (imageId: number | string) => Promise<Image> = async (imageId: number | string) => {
+    // { { BASIC_PATH } }/Image/get-image-by-id?id=1
+    const response = await fetch(`${BASE_URL}/Image/get-image-by-id?id=${imageId}`);
+    const image: Image = await response.json();
+    return image;
+}
+
 export const getUserPurchasedImages: (userId: number | string) => Promise<Image[]> = async (userId: number | string) => {
     const response = await fetch(`${BASE_URL}/Image/get-user-purchased-images?`
         + new URLSearchParams({foo: "userId", value:`${userId}`})
