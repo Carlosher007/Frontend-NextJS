@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "app/core/lib/placeholder-data.js",
     "scripts/seed.js"
-, "app/core/context/filters.js"  ],
+, "app/core/context/filters.js", "app/auth/ui/icons/EyeFilledIcon.jsx"  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

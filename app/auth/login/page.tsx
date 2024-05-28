@@ -6,10 +6,7 @@ import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { Input } from "@nextui-org/react";
 import { Card, CardBody, CardHeader, CardFooter, Divider } from "@nextui-org/react";
-
-import { EyeFilledIcon } from "../ui/icons/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "../ui/icons/EyeSlashFilledIcon";
-import { UserIcon } from "../ui/icons/UserIcon";
+import { UserIcon, EyeFilledIcon, EyeSlashFilledIcon } from "@/app/core/ui/icons";
 import { set } from "zod";
 
 export default function Page() {
@@ -44,13 +41,13 @@ export default function Page() {
   }
 
   return (
-    <div className="m-4">
+    <div className="p-4">
       <Link href="/" className="text-2xl uppercase font-bold tracking-wider"> ImageHub </Link>
       <div className="flex flex-col gap-10 max-w-96 justify-center items-center mx-auto h-screen overflow-auto">
         <Card className="max-w-[400px]">
           <CardHeader className="flex gap-3">
             <div className="flex flex-col">
-              <p className="text-3xl mx-auto">Login</p>
+              <p className="text-3xl mx-auto">Sign in</p>
               <br></br>
               <p className="text-small text-default-500 mx-auto">Enter your credentials to log into the app</p>
             </div>
@@ -90,12 +87,17 @@ export default function Page() {
               onPress={onPressHandle}
               isLoading={isLoading}
             >
-              Login
+              Sign in
             </Button>
           </CardBody>
           <Divider />
           <CardFooter >
-            <p className="mx-auto text-gray-400 text-small">Not a member yet?<Link href="/auth/register" className="text-blue-500 mx-auto"> Sign up </Link></p>
+            <div className="flex flex-col max-w-96 justify-center items-center mx-auto ">
+              <p className="text-gray-400 text-small">Not a member yet?<Link href="/auth/register" className="text-blue-500"> Sign up </Link></p>
+              <br />
+              <Link href="/auth/register" className="text-small text-blue-500"> Forgot Password? </Link>
+
+            </div>
           </CardFooter>
         </Card>
       </div>

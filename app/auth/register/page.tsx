@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import { Input } from "@nextui-org/react";
 import { Card, CardBody, CardHeader, CardFooter, Divider } from "@nextui-org/react";
 
-import { EyeFilledIcon } from "../ui/icons/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "../ui/icons/EyeSlashFilledIcon";
-import { UserIcon } from "../ui/icons/UserIcon";
+import { UserIcon, EyeFilledIcon, EyeSlashFilledIcon } from "@/app/core/ui/icons";
 
 
 export default function Page() {
@@ -21,7 +19,7 @@ export default function Page() {
   const toggleVisibilityConf = () => setIsVisibleConf(!isVisibleConf);
 
   return (
-    <div className="m-4">
+    <div className="p-4">
       <Link href="/" className="text-2xl uppercase font-bold tracking-wider"> ImageHub </Link>
       <div className="flex flex-col gap-2 max-w-96 justify-center items-center mx-auto h-screen overflow-auto">
         <Card className="max-w-[400px]">
@@ -114,7 +112,7 @@ export default function Page() {
           </CardBody>
           <Divider />
           <CardFooter >
-            <p className="mx-auto text-gray-400 text-small">Already have an account?<Link href="/auth/login" className="text-blue-500 mx-auto"> Login here </Link></p>
+            <p className="mx-auto text-gray-400 text-small">Already have an account?<Link href="/auth/login" className="text-blue-500 mx-auto"> Sign in </Link></p>
           </CardFooter>
         </Card>
       </div>
