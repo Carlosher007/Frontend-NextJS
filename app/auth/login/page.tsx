@@ -95,7 +95,7 @@ export default function Page() {
             <div className="flex flex-col max-w-96 justify-center items-center mx-auto ">
               <p className="text-gray-400 text-small">Not a member yet?<Link href="/auth/register" className="text-blue-500"> Sign up </Link></p>
               <br />
-              <Link href="/auth/register" className="text-small text-blue-500"> Forgot Password? </Link>
+              <Link href="/auth/password/reset" className="text-small text-blue-500"> Forgot Password? </Link>
 
             </div>
           </CardFooter>
