@@ -5,9 +5,10 @@ import { persist, devtools } from 'zustand/middleware';
 
 type UserState = {
   idUser: number | null;
+  username: string | null;
   isLogged: boolean;
   loading: boolean;
-  addUser: (idUser: number) => void;
+  addUser: (idUser: number, username: string) => void;
   removeUser: () => void;
   setLoading: (loading: boolean) => void;
 };
@@ -18,10 +19,11 @@ export const useUserStore = create<UserState>()(devtools(
       idUser: null,
       isLogged: false,
       loading: true,
+      username: null,
 
-      addUser: (idUser) => set(() => ({ idUser: idUser, isLogged: true })),
+      addUser: (idUser, username) => set(() => ({ idUser: idUser, username: username, isLogged: true })),
 
-      removeUser: () => set(() => ({ idUser: null, isLogged: false })),
+      removeUser: () => set(() => ({ idUser: null, isLogged: false, username:null })),
 
       setLoading: (loading) => set(() => ({ loading })),
     }),

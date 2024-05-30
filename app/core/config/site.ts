@@ -16,7 +16,7 @@ export const siteConfig = {
     },
     logged && {
       label: 'Logout',
-      href: '/logout',
+      href: 'dashboard/logout',
     },
   ],
   navMenuItems: [
@@ -30,7 +30,7 @@ export const siteConfig = {
     },
     logged && {
       label: 'Logout',
-      href: '/logout',
+      href: '/dashboard/logout',
     },
   ],
   links: {

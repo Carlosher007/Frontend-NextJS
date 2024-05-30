@@ -21,6 +21,7 @@ export default function Page() {
 
   const onPressHandle = () => {
     setIsLoading(true);
+    addUser(1, "johndoe");
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -33,7 +34,7 @@ export default function Page() {
   };
 
   const handleAddUser = () => {
-    addUser(customUser.id);
+    addUser(customUser.id, "johndoe");
   }
 
   const handleRemoveUser = () => {
