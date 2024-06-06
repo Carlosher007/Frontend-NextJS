@@ -4,8 +4,12 @@ import Link from "next/link";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 
+import { useUserStore } from "@/app/core/store";
+
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
+
+  const username = useUserStore(state => state.username);
   
 
 
@@ -43,7 +47,7 @@ export default function Page() {
           <Divider />
           <CardFooter >
             <div className="flex flex-col max-w-96 justify-center items-center mx-auto ">
-              <p className="text-gray-400 text-small">Not a member yet?<Link href="/auth/register" className="text-blue-500"> Sign up </Link></p>
+              {!username && <p className="text-gray-400 text-small">Not a member yet?<Link href="/auth/register" className="text-blue-500"> Sign up </Link></p>}
               <br />
             </div>
           </CardFooter>

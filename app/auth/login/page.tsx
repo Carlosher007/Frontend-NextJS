@@ -8,12 +8,14 @@ import { Input } from "@nextui-org/react";
 import { Card, CardBody, CardHeader, CardFooter, Divider } from "@nextui-org/react";
 import { UserIcon, EyeFilledIcon, EyeSlashFilledIcon } from "@/app/core/ui/icons";
 import { set } from "zod";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const addUser = useUserStore(state => state.addUser);
   const removeUser = useUserStore(state => state.removeUser);
   const id = useUserStore(state => state.idUser);
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,7 +23,8 @@ export default function Page() {
 
   const onPressHandle = () => {
     setIsLoading(true);
-    addUser(1, "johndoe");
+    addUser(customUser.id, customUser.username);
+    router.push('/');
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -34,7 +37,7 @@ export default function Page() {
   };
 
   const handleAddUser = () => {
-    addUser(customUser.id, "johndoe");
+    addUser(customUser.id, customUser.username);
   }
 
   const handleRemoveUser = () => {
@@ -96,7 +99,7 @@ export default function Page() {
             <div className="flex flex-col max-w-96 justify-center items-center mx-auto ">
               <p className="text-gray-400 text-small">Not a member yet?<Link href="/auth/register" className="text-blue-500"> Sign up </Link></p>
               <br />
-              <Link href="/auth/password/reset" className="text-small text-blue-500"> Forgot Password? </Link>
+              <Link href="/password/reset" className="text-small text-blue-500"> Forgot Password? </Link>
 
             </div>
           </CardFooter>
