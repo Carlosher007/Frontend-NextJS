@@ -9,25 +9,75 @@ import { Card, CardBody, CardHeader, CardFooter, Divider } from "@nextui-org/rea
 import { UserIcon, EyeFilledIcon, EyeSlashFilledIcon } from "@/app/core/ui/icons";
 import { set } from "zod";
 import { useRouter } from "next/navigation";
+import { loginUser, infoUser } from "@/app/core/api/users/service";
+import { Toaster, toast } from "sonner";
 
 export default function Page() {
-  const addUser = useUserStore(state => state.addUser);
-  const removeUser = useUserStore(state => state.removeUser);
-  const id = useUserStore(state => state.idUser);
-  const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
-
+  
+  const addUser = useUserStore(state => state.addUser);
+  const addToken = useUserStore(state => state.addToken);
+  const removeUser = useUserStore(state => state.removeUser);
+  const token = useUserStore(state => state.token);
+  const id = useUserStore(state => state.idUser);
+  
+  const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [inputValue1, setInputValue1] = useState('');
+  const [inputValue2, setInputValue2] = useState('');
+
+  const handleInputChange1 = (e) => setInputValue1(e.target.value);
+  const handleInputChange2 = (e) => setInputValue2(e.target.value);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  const onPressHandle = () => {
+  const onPressHandle = async () => {
     setIsLoading(true);
-    addUser(customUser.id, customUser.username);
-    router.push('/');
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+
+    var status = 0;
+
+    const res = await loginUser(inputValue1, inputValue2);
+    console.log(res);
+
+    try {
+      status = res.status;
+    } catch (error){
+      status = res.response.status;
+    }
+
+    if (status == 200){
+      addToken(res.data.access)
+      const aux = await infoUser(token);
+      addUser(aux?.data.id, aux?.data.username);      
+    }else if(res.response.status == 401){
+      toast.error("No active account found with the given credentials")
+    }else if(res.response.status == 400){
+      toast.error('Invalid input')
+    }else {
+      toast.error('Something went wrong')
+    }
+
+    //addUser(customUser.id, customUser.username);
+    //router.push('/');
+    
+    /*try {
+      if (res.status == 200){
+        addToken(res.data.access)
+        aux = await infoUser(token);
+        console.log(aux)
+      }
+    } catch (error) {
+      if(res.response.status == 401){
+        toast.error("No active account found with the given credentials")
+      }else if(res.response.status == 400){
+        toast.error('Invalid input')
+      }else {
+        toast.error('Something went wrong')
+      }*/
+  //}
+      
+    setIsLoading(false);
+    
   }
 
   const customUser = {
@@ -58,7 +108,7 @@ export default function Page() {
           </CardHeader>
           <Divider />
           <CardBody>
-            <Input
+            <Input value={inputValue1} onChange={handleInputChange1}
               className="my-3"
               isRequired
               size="sm"
@@ -66,7 +116,7 @@ export default function Page() {
               type="username"
               label="Username"
               errorMessage="Please enter a valid Username" />
-            <Input
+            <Input value={inputValue2} onChange={handleInputChange2}
               className="my-3"
               isRequired
               size="sm"
@@ -105,6 +155,7 @@ export default function Page() {
           </CardFooter>
         </Card>
       </div>
+      <Toaster richColors  />
     </div>
   )
 }

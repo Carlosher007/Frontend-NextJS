@@ -8,7 +8,9 @@ type UserState = {
   username: string | null;
   isLogged: boolean;
   loading: boolean;
+  token: string | null;
   addUser: (idUser: number, username: string) => void;
+  addToken: (token: string) => void;
   removeUser: () => void;
   setLoading: (loading: boolean) => void;
 };
@@ -20,10 +22,13 @@ export const useUserStore = create<UserState>()(devtools(
       isLogged: false,
       loading: true,
       username: null,
+      token: null,
 
       addUser: (idUser, username) => set(() => ({ idUser: idUser, username: username, isLogged: true })),
 
-      removeUser: () => set(() => ({ idUser: null, isLogged: false, username:null })),
+      addToken: (token) => set(() => ({ token: token })),
+
+      removeUser: () => set(() => ({ idUser: null, isLogged: false, username:null, token:null })),
 
       setLoading: (loading) => set(() => ({ loading })),
     }),
