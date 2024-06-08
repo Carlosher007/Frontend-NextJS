@@ -103,7 +103,8 @@ export const activateUser = async (uid:string, token:string) => {
             token: token
         });
         return response;
-    } catch (error) {
-        return null;
+    } catch (error:any) {
+        const response = error.response;
+        return response;
     }
 }
