@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Suspense, useEffect, useState } from 'react'
-import Orders from '../../core/ui/history/orders'
-import SkeletonOrder from '../../core/ui/skeletons'
+import { Suspense, useEffect, useState } from 'react';
+import Orders from '../../core/ui/history/orders';
+import SkeletonOrder from '../../core/ui/skeletons';
 const page = () => {
   return (
     <div>
@@ -10,7 +10,7 @@ const page = () => {
         <Orders />
       </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

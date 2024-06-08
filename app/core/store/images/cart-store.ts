@@ -1,9 +1,11 @@
 import { create } from 'zustand';
-import { Image } from "@/app/core/lib/definitions";
+import { Image } from '@/app/core/lib/definitions';
 import { persist, devtools } from 'zustand/middleware';
-import { assignImageFromCart, deleteCart, deleteImageFromCart } from '@/app/core/api/shoppingcart/service';
-import { useUserStore } from "@/app/core/store";
-
+import {
+  assignImageFromCart,
+  deleteCart,
+  deleteImageFromCart,
+} from '@/app/core/api/shoppingcart/service';
 
 type CartState = {
   cart: Image[];
@@ -13,20 +15,19 @@ type CartState = {
   setCart: (cart: Image[]) => void;
 };
 
-
 export const useCartStore = create<CartState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set) => ({
         cart: [],
         idUser: null,
 
         addToCart: async (image, userId) => {
           if (userId) {
             const response = await assignImageFromCart(userId, image.imageId);
-            console.log(response)
+            console.log(response);
             if (!response) return;
-            set((state) => ({ cart: [...state.cart, image] }))
+            set((state) => ({ cart: [...state.cart, image] }));
           }
         },
 
@@ -34,7 +35,9 @@ export const useCartStore = create<CartState>()(
           if (userId) {
             const response = await deleteImageFromCart(userId, id);
             if (!response) return;
-            set((state) => ({ cart: state.cart.filter((img) => img.imageId !== id) }))
+            set((state) => ({
+              cart: state.cart.filter((img) => img.imageId !== id),
+            }));
           }
         },
 
@@ -42,13 +45,13 @@ export const useCartStore = create<CartState>()(
           if (userId) {
             const response = await deleteCart(userId);
             if (!response) return;
-            set((state) => ({ cart: [] }))
+            set((state) => ({ cart: [] }));
           }
         },
 
         setCart: (cart) => set(() => ({ cart })),
-
       }),
       { name: 'cart-storage' },
-    )),
+    ),
+  ),
 );

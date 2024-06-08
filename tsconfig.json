@@ -34,8 +34,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/core/lib/placeholder-data.js",
-    "scripts/seed.js"
-, "app/core/context/filters.js"  ],
+    "scripts/seed.js",
+    "app/core/context/filters.js"
+  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

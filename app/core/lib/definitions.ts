@@ -1,14 +1,8 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-
 import { SVGProps } from 'react';
-import { Dispatch, SetStateAction } from 'react';
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
-
-// GENERAL
 
 export type User = {
   id: string;
@@ -34,8 +28,8 @@ export type Image = {
 };
 
 export type ImageCategory = {
-  category: Category
-}
+  category: Category;
+};
 
 export type Category = {
   category_id: number;

@@ -1,7 +1,7 @@
 export default function Page() {
   return (
-    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
       Register
     </button>
-  )
+  );
 }
