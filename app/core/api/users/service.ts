@@ -57,7 +57,7 @@ export const verifyToken = async (token:string) => {
     }
 }
 
-const refreshToken = async (refresh:string) => {
+export const refreshToken = async (refresh:string) => {
     try {
         const response = await userApi.post(`/auth/jwt/refresh/`, {
             refresh: refresh
@@ -68,16 +68,17 @@ const refreshToken = async (refresh:string) => {
     }
 }
 
-const updateUser = async (data: JsonWebKey, token:string) => {
+export const updateUser = async (data: any, token:string) => {
     try {
-        const response = await userApi.patch(`/auth/users/lme/`,data,{
+        const response = await userApi.patch(`/auth/users/me/`,data,{
             headers:{
                 'Authorization': `JWT ${token}`
             }}
         );
         return response;
-    } catch (error) {
-        return null;
+    } catch (error: any) {
+        const response = error.response;
+        return response;
     }
 }
 
@@ -94,7 +95,7 @@ export const infoUser = async (token:string) => {
     }
 }
 
-const activateUser = async (uid:string, token:string) => {
+export const activateUser = async (uid:string, token:string) => {
     try {
         const response = await userApi.post(`/auth/users/activation/`,{
             uid: uid,

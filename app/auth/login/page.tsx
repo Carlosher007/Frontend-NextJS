@@ -18,7 +18,7 @@ export default function Page() {
   const addUser = useUserStore(state => state.addUser);
   const addToken = useUserStore(state => state.addToken);
   const removeUser = useUserStore(state => state.removeUser);
-  const token = useUserStore(state => state.token);
+  const token: any = useUserStore(state => state.token);
   const id = useUserStore(state => state.idUser);
   
   const [isVisible, setIsVisible] = useState(false);
@@ -26,8 +26,8 @@ export default function Page() {
   const [inputValue1, setInputValue1] = useState('');
   const [inputValue2, setInputValue2] = useState('');
 
-  const handleInputChange1 = (e) => setInputValue1(e.target.value);
-  const handleInputChange2 = (e) => setInputValue2(e.target.value);
+  const handleInputChange1 = (e: any) => setInputValue1(e.target.value);
+  const handleInputChange2 = (e: any) => setInputValue2(e.target.value);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -35,9 +35,7 @@ export default function Page() {
     setIsLoading(true);
 
     var status = 0;
-
-    const res = await loginUser(inputValue1, inputValue2);
-    console.log(res);
+    const res: any = await loginUser(inputValue1, inputValue2);
 
     try {
       status = res.status;
@@ -47,51 +45,17 @@ export default function Page() {
 
     if (status == 200){
       addToken(res.data.access)
-      const aux = await infoUser(token);
-      addUser(aux?.data.id, aux?.data.username);      
+      const aux = await infoUser(res.data.access);
+      addUser(aux?.data.id, aux?.data.username, aux?.data.first_name, aux?.data.last_name, aux?.data.email);
+      router.push('/');      
     }else if(res.response.status == 401){
       toast.error("No active account found with the given credentials")
     }else if(res.response.status == 400){
       toast.error('Invalid input')
     }else {
       toast.error('Something went wrong')
-    }
-
-    //addUser(customUser.id, customUser.username);
-    //router.push('/');
-    
-    /*try {
-      if (res.status == 200){
-        addToken(res.data.access)
-        aux = await infoUser(token);
-        console.log(aux)
-      }
-    } catch (error) {
-      if(res.response.status == 401){
-        toast.error("No active account found with the given credentials")
-      }else if(res.response.status == 400){
-        toast.error('Invalid input')
-      }else {
-        toast.error('Something went wrong')
-      }*/
-  //}
-      
+    } 
     setIsLoading(false);
-    
-  }
-
-  const customUser = {
-    id: 1,
-    username: 'johndoe',
-    email: 'john22@gmail.com'
-  };
-
-  const handleAddUser = () => {
-    addUser(customUser.id, customUser.username);
-  }
-
-  const handleRemoveUser = () => {
-    removeUser();
   }
 
   return (
