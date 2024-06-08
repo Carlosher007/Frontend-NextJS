@@ -118,7 +118,7 @@ export default function Page() {
               onPress={handlePress}
               isLoading={isLoading}
             >
-              Sign in
+              Change fields
             </Button>
           </CardBody>
           <Divider />
