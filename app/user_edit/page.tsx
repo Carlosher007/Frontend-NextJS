@@ -37,30 +37,38 @@ export default function Page() {
   const route = useRouter();
 
   useEffect(() => {
-      if(!id){
-        route.push('/')
-      }
+    if (!id) {
+      route.push('/')
+    }
   }, []);
 
   const handlePress = async () => {
     setIsLoading(true);
-    var status;
-    const res: any = await updateUser({first_name: inputValue1, last_name: inputValue2, email: inputValue3}, token);
-    
-    try {
-      status = res.status;
-    } catch (error){
-      status = res.response.status;
-    }
 
-    if(status == 401){
-      removeUser();
-      route.push('/auth/login');
-    } else if(status == 200){
-      addUser(id, username, inputValue1, inputValue2, inputValue3);
-      toast.success('User updated successfully');
-    } else {
-      toast.error('Something went wrong, try again later');
+    if (inputValue1 == '' || inputValue2 == '' || inputValue3 == '') {
+      toast.error('Please fill all the fields');
+    } else if( !email.includes('@') || !email.includes('.')){
+      toast.error('Please enter a valid email');
+    } 
+    else {
+      var status;
+      const res: any = await updateUser({ first_name: inputValue1, last_name: inputValue2, email: inputValue3 }, token);
+
+      try {
+        status = res.status;
+      } catch (error) {
+        status = res.response.status;
+      }
+
+      if (status == 401) {
+        removeUser();
+        route.push('/auth/login');
+      } else if (status == 200) {
+        addUser(id, username, inputValue1, inputValue2, inputValue3);
+        toast.success('User updated successfully');
+      } else {
+        toast.error('Something went wrong, try again later');
+      }
     }
 
     setIsLoading(false);
@@ -80,7 +88,7 @@ export default function Page() {
           </CardHeader>
           <Divider />
           <CardBody>
-          <div className="w-full flex flex col gap-4">
+            <div className="w-full flex flex col gap-4">
               <Input
                 className="my-3"
                 size="sm"

@@ -29,8 +29,9 @@ export const createUser = async (email:string, first_name: string, last_name: st
             re_password: re_password
         });
         return response;
-    } catch (error) {
-        return null;
+    } catch (error: any) {
+        const response = error.response;
+        return response;
     }
 }
 
