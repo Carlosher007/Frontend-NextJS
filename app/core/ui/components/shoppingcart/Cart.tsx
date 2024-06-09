@@ -66,7 +66,7 @@ export function Cart() {
 				const imagesCartIdNumbers = cart.map((image) => image.imageId);
 				const response = await buyImages(idUser, imagesCartIdNumbers);
 				if (response) {
-					deleteCard(idUser.toString());
+					clearCart(idUser);
           toast.success('Images bought successfully');
         }
 			}
