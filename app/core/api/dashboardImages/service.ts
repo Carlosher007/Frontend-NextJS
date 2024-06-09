@@ -34,8 +34,7 @@ export const getUserPurchasedImages: (
   userId: number | string,
 ) => Promise<Image[]> = async (userId: number | string) => {
   const response = await fetch(
-    `${BASE_URL}/Image/get-user-purchased-images?` +
-      new URLSearchParams({ foo: 'userId', value: `${userId}` }),
+    `${BASE_URL}/Image/get-user-purchased-images?userId=${userId}`
   );
   const images: Image[] = await response.json();
   return images;
@@ -86,7 +85,7 @@ export const buyImages = async (userId: number, images: number[]) => {
       `${BASE_URL}/Image/user-buy-images?userId=${userId}`,
       {
         method: 'POST',
-        body: JSON.stringify({ images }),
+        body: JSON.stringify(images),
         headers: {
           'Content-Type': 'application/json',
         },
