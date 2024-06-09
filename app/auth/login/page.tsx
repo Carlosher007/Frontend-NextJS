@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useUserStore } from "@/app/core/store";
 import Link from "next/link";
@@ -121,5 +121,5 @@ export default function Page() {
       </div>
       <Toaster richColors  />
     </div>
-  )
+  );
 }

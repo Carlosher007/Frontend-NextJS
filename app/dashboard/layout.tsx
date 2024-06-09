@@ -1,51 +1,47 @@
-"use client"
-import { Navbar } from "@/app/core/ui/components/dashboard/dashboard-header";
-import { Link } from "@nextui-org/link";
-import { siteConfig } from "@/app/core/config/site";
-import { useEffect } from "react";
-import { useUserStore, useCartStore } from "@/app/core/store";
+'use client';
+import { useEffect } from 'react';
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [idUser, isLogged, loading, setLoading] = useUserStore((state) => [state.idUser, state.isLogged, state.loading, state.setLoading]);
+import { useUserStore } from '@/app/core/store';
+import { Navbar } from '@/app/core/ui/components/dashboard/dashboard-header';
+import { Link } from '@nextui-org/link';
+import { useSiteConfig } from '@/app/core/config/site';
 
-  const { getCart } = useCartStore();
+export default function Layout({ children }: { children: React.ReactNode }) {
+  const [idUser, loading, setLoading] = useUserStore((state) => [
+    state.idUser,
+    state.loading,
+    state.setLoading,
+  ]);
 
+  const siteConfig = useSiteConfig();
 
   useEffect(() => {
-    // Establece el estado de carga a true al inicio de la carga de datos
     setLoading(true);
 
-    // Carga los datos del usuario aquí...
+    // Load you user data here...
     // const getCartApi = async () => {
     //   getCart();
     // }
     // getCartApi()
 
-    // Establece el estado de carga a false al final de la carga de datos
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <div className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-        {
-          loading ?
-            <div>Loading...</div>
-            :
-            isLogged ?
-              children
-              :
-              <div>
-                You must be logged in to access this page
-              </div>
-        }
+      <div className="container mx-auto max-w-7xl flex-grow px-6 pt-16">
+        {loading ? (
+          // TODO: Add a spinner here
+          <div>Loading...</div>
+        ) : idUser ? (
+          children
+        ) : (
+          <div>You must be logged in to access this page</div>
+        )}
       </div>
-      <footer className="w-full flex items-center justify-center py-3">
+      <footer className="flex w-full items-center justify-center py-3">
         <Link
           isExternal
           className="flex items-center gap-1 text-current"

@@ -1,5 +1,3 @@
-//This file (utils.ts) contains utility functions that help you work with your data.
-
 export const objectToFormData = (obj: object | any) => {
   var formData = new FormData();
   for (var key in obj) {

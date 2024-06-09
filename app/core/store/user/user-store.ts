@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { User } from '@/app/core/lib/definitions';
 import { persist, devtools } from 'zustand/middleware';
 
-
 type UserState = {
   idUser: number | null;
   username: string | null;
@@ -36,18 +35,9 @@ export const useUserStore = create<UserState>()(devtools(
 
       removeUser: () => set(() => ({ idUser: null, isLogged: false, username:null, token:null, first_name: null, last_name: null, email: null})),
 
-      setLoading: (loading) => set(() => ({ loading })),
-    }),
-    { name: 'user-storage' },
-  )),
+        setLoading: (loading) => set(() => ({ loading })),
+      }),
+      { name: 'user-storage' },
+    ),
+  ),
 );
-
-/*
-Para que no de errores de hidratación, debemos ahcer que nuestra app lea el almacenamiento local una vez este componente se haya montado en el lado del cliente. Por lo que se debe poner lo siguiente (donde se use):
-
-(SOLO SI DA ERROR DE HIDRATACION)
-
-useEffect(() => {
-  useUserStore.persist.rehydrate();
-}, []);
-*/

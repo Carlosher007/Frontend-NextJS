@@ -9,7 +9,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const [idUser, isLogged, loading, setLoading] = useUserStore((state) => 
     [state.idUser, state.isLogged, state.loading, state.setLoading]);
 
