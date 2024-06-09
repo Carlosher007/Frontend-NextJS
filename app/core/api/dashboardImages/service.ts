@@ -80,6 +80,24 @@ export const deleteImage = async (imageId: string) => {
   }
 };
 
+export const buyImages = async (userId: number, images: number[]) => {
+  try {
+    const post = await fetch(
+      `${BASE_URL}/Image/user-buy-images?userId=${userId}`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ images }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    return post;
+  } catch (err) {
+    throw new Error((err as Error).message);
+  }
+}
+
 export const updateImage = async (imageData: any, imageId: number) => {
   try {
     const data: any = {
