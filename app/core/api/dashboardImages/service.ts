@@ -12,8 +12,7 @@ export const getUserImages: (
   userId: number | string,
 ) => Promise<Image[]> = async (userId: number | string) => {
   const response = await fetch(
-    `${BASE_URL}/Image/get-user-images?` +
-      new URLSearchParams({ foo: 'userId', value: `${userId}` }),
+    `${BASE_URL}/Image/get-user-images?userId=${userId}`
   );
   const images: Image[] = await response.json();
   return images;
