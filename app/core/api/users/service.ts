@@ -108,3 +108,30 @@ export const activateUser = async (uid:string, token:string) => {
         return response;
     }
 }
+
+export const resetPassword = async (email:string) => {
+    try {
+        const response = await userApi.post(`/auth/users/reset_password/`,{
+            email: email
+        });
+        return response;
+    } catch (error: any) {
+        const response = error.response;
+        return response;
+    }
+}
+
+export const resetPasswordConfirm = async (new_password:string, re_new_password:string, uid:string, token:string) => {
+    try {
+        const response = await userApi.post(`/auth/users/reset_password_confirm/`,{
+            new_password: new_password,
+            re_new_password: re_new_password,
+            uid: uid,
+            token: token
+        });
+        return response;
+    } catch (error: any) {
+        const response = error.response;
+        return response;
+    }
+}
