@@ -16,6 +16,8 @@ export const getUsers = async (user_id: number) => {
     }
 };
 
+
+
 export const createUser = async (email:string, first_name: string, last_name: string, username:string,
     password:string, re_password:string
 ) => {

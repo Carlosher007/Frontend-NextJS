@@ -67,12 +67,12 @@ export function Cart() {
 				const response = await buyImages(idUser, imagesCartIdNumbers);
 				if (response) {
 					clearCart(idUser);
-          toast.success('Images bought successfully');
-        }
+					toast.success('Images bought successfully');
+				}
 			}
 		} catch (error) {
 			console.error(error);
-      toast.error('An error occurred while buying the images');
+			toast.error('An error occurred while buying the images');
 		}
 	};
 
@@ -81,16 +81,21 @@ export function Cart() {
 			if (idUser) {
 				const response = await getCartAPI(idUser);
 				if (!response) return;
-				const { cartImages } = response;
-				// const response2 = await getImageById(cartImages[0].imageId)
-				const imagePromises = cartImages.map(async (item: ImageDefinition) => {
-					const response2 = await getImageById(item.imageId);
-					return response2;
-				});
+				console.log(response)
+				if (response && response.cartImages) {
+					const { cartImages } = response;
+					// const response2 = await getImageById(cartImages[0].imageId)
+					const imagePromises = cartImages.map(
+						async (item: ImageDefinition) => {
+							const response2 = await getImageById(item.imageId);
+							return response2;
+						},
+					);
 
-				const images = await Promise.all(imagePromises);
-				console.log(images);
-				setCart(images);
+					const images = await Promise.all(imagePromises);
+					console.log(images);
+					setCart(images);
+				}
 			}
 		};
 		getCartApi();

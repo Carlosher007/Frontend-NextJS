@@ -11,6 +11,7 @@ import { set } from "zod";
 import { useRouter } from "next/navigation";
 import { loginUser, infoUser } from "@/app/core/api/users/service";
 import { Toaster, toast } from "sonner";
+import axios from 'axios';
 
 export default function Page() {
   const router = useRouter();

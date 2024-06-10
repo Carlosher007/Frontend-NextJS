@@ -31,8 +31,8 @@ export const getCart = async (user_id: number) => {
 export const getImageFromCart = async (user_id: number, image_id: number) => {
   try {
     const response = await orderApi.get(
-      `/getCartByUserId/${user_id}/${image_id}`,
-    );
+			`/getImageFromCart/${user_id}/${image_id}`,
+		);
     return response.data;
   } catch (error) {
     // console.error('Error fetching data:', error);
