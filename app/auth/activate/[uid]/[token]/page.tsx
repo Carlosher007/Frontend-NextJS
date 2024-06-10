@@ -52,7 +52,7 @@ export default function Page({ params }: { params: { uid: string, token:string }
                 <br/>
                 <br/>
                 <br/>
-                <p>After you click the link, you'll be able to sign in the app</p>
+                <p>After you click the link, you will be able to sign in the app</p>
                 <p className="text-small text-gray-400">Welcome to ImageHub Family!</p>
             </div>
             <Toaster richColors/>
