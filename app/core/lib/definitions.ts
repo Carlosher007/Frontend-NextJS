@@ -32,7 +32,7 @@ export type ImageCategory = {
 };
 
 export type Category = {
-  category_id: number;
+  categoryId: number;
   name: string;
   description: string;
 };
